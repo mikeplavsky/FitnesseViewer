@@ -23,7 +23,7 @@ var show_list = function (res, list) {
     
     var all = all_scenarios();
     
-    $( '.fv-scenario' ).hover( function () { show_scenario(all, $(this)); }, hide_scenario );        
+    //$( '.fv-scenario' ).hover( function () { show_scenario(all, $(this)); }, hide_scenario );        
     $( '.fv-view' ).click( function () { toggle_view( $(this) ) } );
 	
 	$( '.fv-scenario' ).click( function() { open_scenario( all, $(this) ); } );
