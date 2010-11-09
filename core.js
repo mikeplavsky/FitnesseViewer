@@ -36,6 +36,7 @@ var all_scenarios = function() {
         s.name = name;
         s.definition = $(this).closest( 'table' ).html();
 		
+		s.table = $(this).closest( 'table' );
 		s.parent = $(this).closest( 'div' );
         
     });

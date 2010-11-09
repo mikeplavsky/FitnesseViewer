@@ -45,6 +45,8 @@ var open_scenario = function(all, $el) {
 		}
 		
 	);		
+	
+	all[$el.text()].table.css( 'background-color', 'lightgreen' );
 }
 
 
