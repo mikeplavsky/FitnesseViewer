@@ -46,7 +46,13 @@ var open_scenario = function(all, $el) {
 		
 	);		
 	
-	all[$el.text()].table.css( 'background-color', 'lightgreen' );
+	var table = all[$el.text()].table;
+	
+	table.css( 'background-color', 'lightgreen' );
+	
+	var x = table.offset().top - 100;   
+    $('html,body').animate( {scrollTop: x}, 500);
+
 }
 
 
