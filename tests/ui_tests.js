@@ -64,33 +64,6 @@ test( 'switching between views', function () {
 
 
 
-test( 'hovering shows scenario definition', function () {
-	
-	toggle_scenarios();
-	
-	$( '#fv_view_all' ).click();
-
-	$( '.fv-scenario:eq(0)' ).mouseover();
-	same( $( '.fv-scenario-def' ).length, 1, 'just one shown definition'  );	
-	
-	$( '.fv-scenario:eq(0)' ).mouseout();	
-	same( $( '.fv-scenario-def' ).length, 0, 'no definition is shown'  );
-	
-	$( '#fv_view_used' ).click();
-	
-	$( '.fv-scenario:eq(1)' ).mouseover();
-	same( $( '.fv-scenario-def' ).text(), 'ScenarioAdd File', 'used definition'  );
-	
-	$( '.fv-scenario:eq(0)' ).mouseout();
-	
-	$( '#fv-view-funcs' ).click();
-	$( '.fv-scenario:eq(1)' ).mouseover();
-	same( $( '.fv-scenario-def' ).length, 0, 'functions do not have definitions'  );
-	
-});
-
-
-
 
 
 
