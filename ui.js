@@ -31,15 +31,17 @@ var show_list = function (res, list) {
 
 var open_scenario = function(all, $el) {	
 
+	var gif = '/files/images/collapsableOpen.gif'
+
 	$( 'div[class=hidden]' )
 	.attr( 'class', 'collapsable' )
 	.find( 'img' )
-		.attr( 'src', '/files/images/collapsableOpen.gif' )
+		.attr( 'src',  gif )
 	.end()
 	.each(
 		
 		function () {
-			$(this).prevAll( 'a' ).find( 'img' ).attr( 'src', '/files/images/collapsableOpen.gif' );			
+			$(this).prevAll( 'a' ).find( 'img' ).attr( 'src', gif );			
 		}
 		
 	);		
