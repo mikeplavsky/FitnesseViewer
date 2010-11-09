@@ -1,0 +1,27 @@
+{
+  "name": "Fitnesse Viewer",
+  "version": "0.1",
+  
+  "description": "Show all scenarios on the page",
+  
+  "background_page": "background.html",
+  
+   "permissions": [
+    "http://*/*"
+  ],
+  
+  "page_action": {
+  
+    "default_icon": "icon.png", 
+    "default_title": "Click to see Fitnesse Scenarios on the page"
+  },
+  
+  "content_scripts": [
+  {
+      "matches": ["http://*/*"],
+      "css": ["styles/base.css"],
+      "js": [ "lib/jquery-1.4.3.js", "templates/scenarios.js", "templates/soyutils.js", "utils.js", "core.js", "ui.js", "inspector.js"]
+  }
+  ]
+  
+}

@@ -1,0 +1,48 @@
+{namespace fitnesse.viewer}
+
+/**
+* @param scenarios
+* @param all_scenarios
+* @param functions
+* @param list
+*/
+{template .scenarios}
+    
+    <div id="fv-header">
+    
+       <div class="fv-view" id="fv-view-all">         
+         All Scenarios: {$all_scenarios.length}
+       </div>
+       <div class="fv-view" id="fv-view-used">
+         Used Scenarios: {$scenarios.length}
+       </div>
+       <div class="fv-view" id="fv-view-funcs"> 
+         Called Functions: {$functions.length}
+       </div>
+         
+    </div>
+    
+    <div id="fv-scenarios-list">
+    
+    {foreach  $s in $list}
+    <div class="fv-scenario">
+        {$s.name}
+    </div>
+    {/foreach}
+    
+    </div>
+    
+{/template}
+
+
+/**
+* 
+*/
+{template .scenario}
+
+    <div class="fv-scenario-def"> 
+        <table>
+        </table>
+    </div>
+
+{/template}

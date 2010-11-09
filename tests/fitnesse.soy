@@ -1,0 +1,60 @@
+{namespace fitnesse.ui}
+
+/**
+* @param scenario
+**/
+{template .scenario}
+	<table>
+		<tr>
+			<td>Scenario</td>
+			<td>{$scenario.name}</td>
+		</tr>
+	</table>
+{/template}
+
+/**
+* @param scenarios
+**/
+{template .script}
+	<table>
+		<tr>
+			<td>Script</td>
+		</tr>
+		
+		{foreach $s in $scenarios}
+		
+		<tr>
+			<td>{$s}</td>
+		</tr>
+		
+		{/foreach}
+		
+	</table>
+{/template}
+
+/**
+* @param scenarios
+*/
+{template .scenario_library}
+	<div id="fitnesse_library">
+		{foreach $s in $scenarios}
+			{call .scenario}
+				{param scenario: $s /}
+			{/call}
+		{/foreach}
+	</div>	
+{/template}
+
+
+/**
+* @param scripts
+*/
+{template .scripts}
+	<div id="scripts">
+		{foreach $s in $scripts}
+			{call .script}
+				{param scenarios: $s /}
+			{/call}
+		{/foreach}
+	</div>	
+{/template}
