@@ -1,3 +1,13 @@
+.fv-selected-view {
+	font-weight: 105%;
+	color: lightgreen;
+}
+
+.fv-selected-scenario {
+	font-weight: 105%;
+	color: lightgreen;
+}
+
 .fv-selected-table {
 	background-color: lightgreen;
 }
