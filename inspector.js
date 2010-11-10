@@ -1,4 +1,4 @@
-if ( $( 'link' ).filter( function() { return $(this).attr( 'href' ).match( 'fitnesse' )  } ).length ) {
+if ( $( 'link' ).filter( function() { return $(this).attr( 'href' ).match( 'fitnesse' )  } ).length && !$( '#test-summary' ).length ) {
 
 chrome.extension.sendRequest( { name: "showPageAction" }, function(){} );
 
