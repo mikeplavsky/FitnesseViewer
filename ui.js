@@ -23,13 +23,13 @@ var show_list = function (res, list) {
     
     var all = all_scenarios();
     
-    //$( '.fv-scenario' ).hover( function () { show_scenario(all, $(this)); }, hide_scenario );        
-    $( '.fv-view' ).click( function () { toggle_view( $(this) ) } );
-	
+    $( '.fv-view' ).click( function () { toggle_view( $(this) ) } );	
 	$( '.fv-scenario' ).click( function() { open_scenario( all, $(this) ); } );
 }
 
 var open_scenario = function(all, $el) {	
+
+	$( '.fv-selected-table' ).removeClass( 'fv-selected-table' );	
 
 	var gif = '/files/images/collapsableOpen.gif'
 
@@ -47,11 +47,10 @@ var open_scenario = function(all, $el) {
 	);		
 	
 	var table = all[$el.text()].table;
+	var x = table.offset().top - 100;
 	
-	table.css( 'background-color', 'lightgreen' );
-	
-	var x = table.offset().top - 100;   
-    $('html,body').animate( {scrollTop: x}, 500);
+	table.addClass( 'fv-selected-table');
+	$('body').animate( {scrollTop: x}, 500);    
 
 }
 

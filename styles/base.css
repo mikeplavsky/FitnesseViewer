@@ -1,3 +1,7 @@
+.fv-selected-table {
+	background-color: lightgreen;
+}
+
 #fv-scenarios {
 
     position: fixed;
