@@ -12,12 +12,12 @@ var get_name = function ($row) {
     );    
     
     return res.join( ' ' );
-}
+};
 
 var scenario_name = function(sc) {
     
     return get_name( sc.parent().find( 'td:odd' ) );
-}
+};
 
 var all_scenarios = function() {
     
@@ -50,12 +50,12 @@ var scripts = function () {
             return $(this).find( 'td:eq(0)').filter( function () { return $(this).text().match( /^script$/i );   } ).length !== 0;         
         });    
     
-}
+};
 
 
 var getQuery = function (text) {
     return text.match( /^(?:Subset|Ordered)? *Query:(.+)/i );
-}
+};
 
 var query_tables = function () {
 
@@ -74,7 +74,7 @@ var query_tables = function () {
         
     return res;        
 
-}
+};
 
 var decision_tables = function () {
 
@@ -99,7 +99,7 @@ var decision_tables = function () {
 
     return res;        
     
-}
+};
 
 var script_scenarios = function (scr) {
 
@@ -129,7 +129,7 @@ var script_scenarios = function (scr) {
     
     return res;
     
-}
+};
 
 var parse_calls = function () {
     
@@ -153,7 +153,7 @@ var parse_calls = function () {
     $.each( query_tables(), parser);
     
     return { scenario_calls: create_array( arr ), func_calls: create_array( funcs) };
-}
+};
 
 var page_calls = function () {
 
@@ -173,7 +173,7 @@ var page_calls = function () {
     
     return res;
     
-}
+};
 
 
 
