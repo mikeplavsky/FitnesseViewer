@@ -67,6 +67,20 @@ test( 'switching between views', function () {
 });
 
 
+test( 'scenario selection', function () {
+
+	toggle_scenarios();
+
+	$( '#fv_view_all' ).click();
+
+	$( '.fv-scenario:eq(0)' ).click();
+	
+	ok( $( '.fv-scenario:eq(0)' ).hasClass( 'fv-selected-scenario' ), 'sceanario is selected on click'  );	
+	same( $( '.fv-selected-scenario' ).length, 1, 'selected just one scenario'  );
+	
+});
+
+
 
 
 
