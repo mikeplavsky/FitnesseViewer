@@ -89,25 +89,6 @@ var toggle_view = function ($el) {
     };
 }
 
-var show_scenario = function (all, $el) {
-
-    var obj = all[ $el.text() ];
-
-    if ( !obj ) {
-        return;
-    }
-    
-    var $parent = $( '#fv-scenarios' );
-    
-    $( document.body ).append( $( fitnesse.viewer.scenario() ) );
-    
-    var $def = $( '.fv-scenario-def:eq(0)' );
-    
-    $def.find( 'table' ).append( $( obj.definition ) );    
-    $def.css( 'top', $el.position().top + $el.height() * 1.5 );
-    
-};
-
 var hide_scenario = function () {
     
     $( document.body ).find( '.fv-scenario-def' ).remove();

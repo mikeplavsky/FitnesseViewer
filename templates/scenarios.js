@@ -17,10 +17,3 @@ fitnesse.viewer.scenarios = function(opt_data, opt_sb) {
   output.append('</div>');
   if (!opt_sb) return output.toString();
 };
-
-
-fitnesse.viewer.scenario = function(opt_data, opt_sb) {
-  var output = opt_sb || new soy.StringBuilder();
-  output.append('<div class="fv-scenario-def"><table></table></div>');
-  if (!opt_sb) return output.toString();
-};
