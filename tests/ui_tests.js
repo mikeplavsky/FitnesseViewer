@@ -52,10 +52,14 @@ test( 'switching between views', function () {
 	ok( $( '#fv-view-all' ).text().match( /4/ ), 'number of discovered scenarios' );
 	
 	$( '#fv-view-all' ).click();
+	
 	equals( $( '.fv-scenario' ).length, 4, 'all discovered scenarios' );
+	ok( $( '#fv-view-all' ).hasClass( 'fv-selected-view' ), 'view all must be selected'  );
 	
 	$( '#fv-view-used' ).click();
 	equals( $( '.fv-scenario' ).length, 3, 'used scenarios' );
+	equals( $( '.fv-selected-view' ).length, 1, 'just one view is selected' ) 
+	ok( $( '#fv-view-used' ).hasClass( 'fv-selected-view' ), 'view used must be selected'  );
 	
 	$( '#fv-view-funcs' ).click();
 	equals( $( '.fv-scenario' ).length, 2, 'used functions' );
