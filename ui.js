@@ -28,7 +28,7 @@ var show_list = function ( res, list, id ) {
 	
 	$( '.fv-selected-table' ).removeClass( 'fv-selected-table' );	
 	$( '#' + id ).addClass( 'fv-selected-view' );
-}
+};
 
 var open_scenario = function(all, $el) {	
 
@@ -36,7 +36,7 @@ var open_scenario = function(all, $el) {
 	
 	$el.addClass( 'fv-selected-scenario' );
 
-	var gif = '/files/images/collapsableOpen.gif'
+	var gif = '/files/images/collapsableOpen.gif';
 
 	$( 'div[class=hidden]' )
 	.attr( 'class', 'collapsable' )
@@ -57,7 +57,7 @@ var open_scenario = function(all, $el) {
 	table.addClass( 'fv-selected-table');
 	$('body').animate( {scrollTop: x}, 500);    
 
-}
+};
 
 
 var toggle_view = function ($el) {
@@ -87,7 +87,7 @@ var toggle_view = function ($el) {
             break;
     
     };
-}
+};
 
 var hide_scenario = function () {
     
