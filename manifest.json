@@ -20,7 +20,7 @@
   {
       "matches": ["http://*/*"],
       "css": ["styles/base.css"],
-      "js": [ "lib/jquery-1.4.3.js", "templates/scenarios.js", "templates/soyutils.js", "utils.js", "core.js", "ui.js", "inspector.js"]
+      "js": [ "lib/jquery-1.4.4.js", "templates/scenarios.js", "templates/soyutils.js", "utils.js", "core.js", "ui.js", "inspector.js"]
   }
   ]
   
