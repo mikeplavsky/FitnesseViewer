@@ -39,15 +39,21 @@ test( 'getting scenario names', function () {
 
     $( '#tests' )
     .append( table( '<td>scenario<td>first' ) )
-    .append( table( '<td>scenario<td>create<td><td>farm' ) );
+    .append( table( '<td>scenario<td>create<td><td>farm' ) )
+	.append( table( '<td>scenario<td>create _   super _  site_' ) )
+	.append( table( '<td>scenario<td>create site_' ) )
+	.append( table( '<td>scenario<td>create     site_' ) );;
     
     var all = scenarios();
+	
+	same( create_array( all_scenarios() ).length, 4, 'should not count scenario twice' );
     
-    var name = scenario_name( all.eq( 0 ) );
-    equals( name, 'first', 'simple name: one cell' );
-    
-    name = scenario_name( all.eq( 1 ) );
-    equals( name, 'create farm', 'scenario name scattered through several cells'	);
+    same( scenario_name( all.eq( 0 ) ), 'first', 'simple name: one cell' );    
+    same( scenario_name( all.eq( 1 ) ), 'create farm', 'scenario name scattered through several cells'	);		
+	same( scenario_name( all.eq( 2 ) ), 'create super site', 'scenario name can contain underscores'	);
+	same( scenario_name( all.eq( 3 ) ), 'create site', 'scenario name can contain underscores'	);
+	
+	
 });
 
 

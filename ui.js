@@ -19,7 +19,7 @@ var show_list = function ( res, list, id ) {
     $( '#fv-scenarios' ).empty();    
     sortBy( list, 'name' );    
     
-    $( '#fv-scenarios' ).append( $( fitnesse.viewer.scenarios( { scenarios : res.scenario_calls, all_scenarios : scenarios(), functions: res.func_calls, list:  list } ) ) );    
+    $( '#fv-scenarios' ).append( $( fitnesse.viewer.scenarios( { scenarios : res.scenario_calls, all_scenarios : create_array( all_scenarios() ), functions: res.func_calls, list:  list } ) ) );    
     
     var all = all_scenarios();
     

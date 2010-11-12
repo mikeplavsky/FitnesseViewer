@@ -11,7 +11,7 @@ var get_name = function ($row) {
     }        
     );    
     
-    return res.join( ' ' );
+    return res.join( ' ' ).replace( /[_|_$]/g, '' ).replace( / {2,}/g, ' ' ).trim();
 };
 
 var scenario_name = function(sc) {
@@ -26,9 +26,9 @@ var all_scenarios = function() {
     scenarios().each( function () {
     
         var name = scenario_name( $(this) );
-        
-        if (!res[ name])  {
-            res[ name] = {};
+		
+        if (!res[name])  {
+            res[name] = {};
         }
         
         var s = res[name];
@@ -139,8 +139,8 @@ var parse_calls = function () {
     var funcs = {};
     
     var parser = function(i,v) {
-    
-        if ( all[ v ] ) {
+	
+		if ( all[v] ) {
             arr[v] = { name : v };       
         }
         else {
