@@ -70,7 +70,7 @@ test( 'getting all script tables', function() {
 });
 
 
-test( 'getting all scenario calls', function () {
+test( 'getting all scenario calls from script tables', function () {
     
     $( '#tests' )
     
@@ -95,7 +95,7 @@ test( 'getting all scenario calls', function () {
             '<tr><td>$super=<td>get data' )            
     );
 
-    var scenarios = page_calls();
+    var scenarios = script_calls();
     
     equals( 7, scenarios.length, 'number of calls'	);    
     
