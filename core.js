@@ -140,11 +140,11 @@ var parse_calls = function () {
     
     var parser = function(i,v) {
 	
-		if ( all[v] ) {
-            arr[v] = { name : v };       
+		if ( all[v.name] ) {
+            arr[v.name] = { name : v.name };       
         }
         else {
-            funcs[v] = { name : v };
+            funcs[v.name] = { name : v.name };
         }
     }
 
