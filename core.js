@@ -66,7 +66,7 @@ var query_tables = function () {
         $(this).find( 'td:eq(0)').each( function() {                
             
             var m = getQuery( $(this).html() );                
-            m && res.push( m[1] );
+            m && res.push( { name: m[1], td : $(this) } );
                         
         });         
             
