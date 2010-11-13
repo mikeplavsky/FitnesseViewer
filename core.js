@@ -148,14 +148,14 @@ var parse_calls = function () {
         }
     }
 
-    $.each( page_calls(), parser );    
+    $.each( script_calls(), parser );    
     $.each( decision_tables(), parser);    
     $.each( query_tables(), parser);
     
     return { scenario_calls: create_array( arr ), func_calls: create_array( funcs) };
 };
 
-var page_calls = function () {
+var script_calls = function () {
 
     var all = scripts();    
     res = [];    
