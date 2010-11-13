@@ -93,7 +93,7 @@ var decision_tables = function () {
         
     var res = [];    
     ts.each( function () {    
-        res.push( get_name( $(this).parent().find( 'td:even' ) ) );    
+        res.push( { name: get_name( $(this).parent().find( 'td:even' ) ), td: $(this) } );    
     }
     );    
 
