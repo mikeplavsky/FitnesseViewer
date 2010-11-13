@@ -114,14 +114,14 @@ var script_scenarios = function (scr) {
         
         if ( text.match( ';$' ) ) {
         
-            res.push( text.slice(0,-1) );
+            res.push( {name: text.slice(0,-1), td: $td0 } );
                         
         }
         else if ( text.match( /^start$/i ) ) {}
         else {
         
             var selector =  text.match( '^[\$].*=$' ) || text.match( /^(show|check|reject|ensure)$/i ) ? 'td:odd' : 'td:even';  
-            res.push( get_name( $(this).find( selector ) ) );        
+            res.push( { name: get_name( $(this).find( selector ) ), td: $td0 } );        
         
         }
         
