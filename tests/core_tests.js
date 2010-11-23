@@ -1,3 +1,5 @@
+var core = fitnesse.viewer.core;
+
 module( 'core ', {
 
 	setup : function() {
@@ -30,7 +32,7 @@ test( 'discovery of scenarios', function () {
     .append( table( '<td>' ) );
     
     
-    var len = scenarios().length;
+    var len = core.scenarios().length;
     equals( len, 2, 'found scenarios'	);
     
 });
@@ -44,14 +46,14 @@ test( 'getting scenario names', function () {
 	.append( table( '<td>scenario<td>create site_' ) )
 	.append( table( '<td>scenario<td>create     site_' ) );;
     
-    var all = scenarios();
+    var all = core.scenarios();
 	
-	same( create_array( all_scenarios() ).length, 4, 'should not count scenario twice' );
+	same( create_array( core.all_scenarios() ).length, 4, 'should not count scenario twice' );
     
-    same( scenario_name( all.eq( 0 ) ), 'first', 'simple name: one cell' );    
-    same( scenario_name( all.eq( 1 ) ), 'create farm', 'scenario name scattered through several cells'	);		
-	same( scenario_name( all.eq( 2 ) ), 'create super site', 'scenario name can contain underscores'	);
-	same( scenario_name( all.eq( 3 ) ), 'create site', 'scenario name can contain underscores'	);
+    same( core.scenario_name( all.eq( 0 ) ), 'first', 'simple name: one cell' );    
+    same( core.scenario_name( all.eq( 1 ) ), 'create farm', 'scenario name scattered through several cells'	);		
+	same( core.scenario_name( all.eq( 2 ) ), 'create super site', 'scenario name can contain underscores'	);
+	same( core.scenario_name( all.eq( 3 ) ), 'create site', 'scenario name can contain underscores'	);
 	
 	
 });
@@ -65,7 +67,7 @@ test( 'getting all script tables', function() {
     .append( table( '<td>Script' ) )
     .append( table( '<td>script' ) );
 
-    var len = scripts().length;
+    var len = core.scripts().length;
     equals( len, 3, 'found scripts' ); 
 });
 
@@ -95,7 +97,7 @@ test( 'getting all scenario calls', function () {
             '<tr><td>$super=<td>get data' )            
     );
 
-    var scenarios = page_calls();
+    var scenarios = core.page_calls();
     
     equals( 7, scenarios.length, 'number of calls'	);    
     
@@ -120,7 +122,7 @@ test( 'getting scenario name and definition', function () {
     .append( table2  );
     
 
-    var all = all_scenarios();
+    var all = core.all_scenarios();
     
     equals( all[ 'create one' ].name, 'create one', 'first scenario name' );    
     equals( all[ 'create two' ].name, 'create two', 'second scenario name' );
@@ -142,7 +144,7 @@ test( 'getting if call is scenario or function call', function () {
     .append( table( '<td>Ñreate List' ) )
     .append( table( '<td>Ñreate List Item' ) );
 
-    var res = parse_calls();
+    var res = core.parse_calls();
     
     equals( res.scenario_calls.length, 1, 'scenario calls' );    
     equals( res.func_calls.length, 4, 'function calls' );    
@@ -163,7 +165,7 @@ test( 'parsing of query tables', function () {
     .append( table( '<tr><td>Ordered Query:Add Farm' ) );
     
     
-    var all = query_tables();
+    var all = core.query_tables();
     
     equals( all.length, 4, 'found query tables' ); 
     
@@ -191,7 +193,7 @@ test( 'parsing of decision tables', function () {
     
     .append(table( '<tr><td>Query:create it' ) );
     
-    var all = decision_tables();
+    var all = core.decision_tables();
     
     equals( all.length, 2, 'found decision tables' );
     
