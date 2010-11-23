@@ -8,6 +8,10 @@
 	color: lightgreen;
 }
 
+.fv-selected-row {
+	background-color: lightgreen;
+}
+
 .fv-selected-table {
 	background-color: lightgreen;
 }

@@ -140,6 +140,10 @@ core.script_scenarios = function (scr) {
 };
 
 core.parse_calls = function () {
+
+    if ( core.parse_calls.res ) {
+        return core.parse_calls.res;
+    }
     
     var all = core.all_scenarios();
     
@@ -167,7 +171,7 @@ core.parse_calls = function () {
     $.each( core.decision_tables(), parser);    
     $.each( core.query_tables(), parser);
     
-    return { scenario_calls: create_array( arr ), func_calls: create_array( funcs) };
+    return core.parse_calls.res = { scenario_calls: create_array( arr ), func_calls: create_array( funcs) };
 };
 
 core.page_calls = function () {

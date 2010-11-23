@@ -29,6 +29,7 @@ module( 'ui', {
 		);
         
         delete fitnesse.viewer.core.all_scenarios.res;
+        delete core.parse_calls.res;
 	
 	} 
 

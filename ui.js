@@ -37,6 +37,8 @@ var show_list = function ( res, list, id ) {
 var open_scenario = function(all, $el) {	
 
 	$( '.fv-selected-table, .fv-selected-scenario' ).removeClass( 'fv-selected-table fv-selected-scenario' );		
+    $( '.fv-selected-row' ).removeClass( 'fv-selected-row' );		
+    $( '.hidden' ).removeClass( 'hidden' );
 	
 	$el.addClass( 'fv-selected-scenario' );
 
@@ -62,6 +64,10 @@ var open_scenario = function(all, $el) {
 	
 	table.addClass( 'fv-selected-table');
 	$('body').animate( {scrollTop: x}, 500);    
+    
+    sc.back_links && $.each( sc.back_links, function (i,v) {
+        $( v.td ).parent().addClass( 'fv-selected-row' ); 
+    } );
 
 };
 
