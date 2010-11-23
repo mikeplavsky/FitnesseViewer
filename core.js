@@ -35,11 +35,7 @@ core.all_scenarios = function() {
     
         var name = core.scenario_name( $(this) );
 		
-        if (!res[name])  {
-            res[name] = {};
-        }
-        
-        var s = res[name];
+        var s = res[name] || ( res[name] = {} );
         
         s.name = name;
         s.definition = $(this).closest( 'table' ).html();
@@ -156,10 +152,7 @@ core.parse_calls = function () {
             
             arr[v.name] = { name : v.name };       
          
-            if ( ! all[v.name].back_links ) {
-                all[v.name].back_links = [];
-            }
-            
+            all[v.name].back_links || (all[v.name].back_links = []);            
             all[v.name].back_links.push(v);
         }
         else {
