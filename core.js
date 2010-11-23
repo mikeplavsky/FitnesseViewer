@@ -24,6 +24,10 @@ core.scenario_name = function(sc) {
 };
 
 core.all_scenarios = function() {
+
+    if ( core.all_scenarios.res ) {
+        return core.all_scenarios.res;
+    }
     
     var res = {};
     
@@ -45,7 +49,7 @@ core.all_scenarios = function() {
         
     });
     
-    return res;
+    return core.all_scenarios.res = res;    
 };
 
 core.scripts = function () {
@@ -145,7 +149,14 @@ core.parse_calls = function () {
     var parser = function(i,v) {
 	
 		if ( all[v.name] ) {
+            
             arr[v.name] = { name : v.name };       
+         
+            if ( ! all[v.name].back_links ) {
+                all[v.name].back_links = [];
+            }
+            
+            all[v.name].back_links.push(v);
         }
         else {
             funcs[v.name] = { name : v.name };

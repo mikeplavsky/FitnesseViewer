@@ -55,7 +55,9 @@ var open_scenario = function(all, $el) {
 		
 	);		
 	
-	var table = all[$el.text()].table;
+    var sc = all[ $el.text() ];
+    
+	var table = sc.table;
 	var x = table.offset().top - 100;
 	
 	table.addClass( 'fv-selected-table');

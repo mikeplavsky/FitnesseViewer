@@ -6,6 +6,8 @@ module( 'core ', {
 		
 		$( '#tests' ).remove();
 		$( 'body' ).append( '<div id="tests">' );
+        
+        delete fitnesse.viewer.core.all_scenarios.res;
 		
 	}
 	
