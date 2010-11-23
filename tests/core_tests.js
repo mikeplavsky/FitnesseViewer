@@ -99,14 +99,14 @@ test( 'getting all scenario calls from script tables', function () {
     
     equals( 7, scenarios.length, 'number of calls'	);    
     
-    equals( scenarios[ 0 ], 'create farm', 'reject should be skipped' );
-    equals( scenarios[ 1 ], 'super farm', 'check should be skipped' );
-    equals( scenarios[ 2 ], 'delete farm', 'ensure should be skipped' );
-    equals( scenarios[ 3 ], 'backup farm', 'show should be skipped' );
+    equals( scenarios[ 0 ].name, 'create farm', 'reject should be skipped' );
+    equals( scenarios[ 1 ].name, 'super farm', 'check should be skipped' );
+    equals( scenarios[ 2 ].name, 'delete farm', 'ensure should be skipped' );
+    equals( scenarios[ 3 ].name, 'backup farm', 'show should be skipped' );
     
-    equals( scenarios[ 4 ], 'restore results', 'two cells' );
-    equals( scenarios[ 5 ], 'restore', '; at the end' );     
-    equals( scenarios[ 6 ], 'get data', 'symbol should be skipped' );
+    equals( scenarios[ 4 ].name, 'restore results', 'two cells' );
+    equals( scenarios[ 5 ].name, 'restore', '; at the end' );     
+    equals( scenarios[ 6 ].name, 'get data', 'symbol should be skipped' );
     
 });
 
@@ -167,8 +167,8 @@ test( 'parsing of query tables', function () {
     
     equals( all.length, 4, 'found query tables' ); 
     
-    equals( all[0], 'Add Farm', 'first query table call' );     
-    equals( all[1], 'Create', 'second query table call' );     
+    equals( all[0].name, 'Add Farm', 'first query table call' );     
+    equals( all[1].name, 'Create', 'second query table call' );     
 });
 
 
@@ -195,8 +195,8 @@ test( 'parsing of decision tables', function () {
     
     equals( all.length, 2, 'found decision tables' );
     
-    equals( all[0], 'Add Farm', 'simple name' );
-    equals( all[1], 'Add Farm To MMC', 'several cells name' );
+    equals( all[0].name, 'Add Farm', 'simple name' );
+    equals( all[1].name, 'Add Farm To MMC', 'several cells name' );
     
 });
 
