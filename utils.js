@@ -1,3 +1,5 @@
+goog.provide( 'fitnesse.viewer.utils' );
+
 var create_array = function (map) {
     
     var res = [];

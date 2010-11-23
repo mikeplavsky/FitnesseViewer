@@ -1,8 +1,12 @@
-var scenarios = function () {    
+goog.provide( 'fitnesse.viewer.core' );
+
+var core = fitnesse.viewer.core;
+
+core.scenarios = function () {    
     return $( 'table' ).find( 'td:eq(0)' ).filter( function () { return $(this).text().match( /^scenario$/i ); }  );    
 };
 
-var get_name = function ($row) {
+core.get_name = function ($row) {
     
     var res = [];
     
@@ -14,18 +18,18 @@ var get_name = function ($row) {
     return res.join( ' ' ).replace( /[_|_$]/g, '' ).replace( / {2,}/g, ' ' ).trim();
 };
 
-var scenario_name = function(sc) {
+core.scenario_name = function(sc) {
     
-    return get_name( sc.parent().find( 'td:odd' ) );
+    return core.get_name( sc.parent().find( 'td:odd' ) );
 };
 
-var all_scenarios = function() {
+core.all_scenarios = function() {
     
     var res = {};
     
-    scenarios().each( function () {
+    core.scenarios().each( function () {
     
-        var name = scenario_name( $(this) );
+        var name = core.scenario_name( $(this) );
 		
         if (!res[name])  {
             res[name] = {};
@@ -44,7 +48,7 @@ var all_scenarios = function() {
     return res;
 };
 
-var scripts = function () {
+core.scripts = function () {
 
     return $( 'table' ).filter( function() {         
             return $(this).find( 'td:eq(0)').filter( function () { return $(this).text().match( /^script$/i );   } ).length !== 0;         
@@ -53,11 +57,11 @@ var scripts = function () {
 };
 
 
-var getQuery = function (text) {
+core.getQuery = function (text) {
     return text.match( /^(?:Subset|Ordered)? *Query:(.+)/i );
 };
 
-var query_tables = function () {
+core.query_tables = function () {
 
     var res = [];   
 
@@ -65,7 +69,7 @@ var query_tables = function () {
     
         $(this).find( 'td:eq(0)').each( function() {                
             
-            var m = getQuery( $(this).html() );                
+            var m = core.getQuery( $(this).html() );                
             m && res.push( { name: m[1], td : $(this) } );
                         
         });         
@@ -76,7 +80,7 @@ var query_tables = function () {
 
 };
 
-var decision_tables = function () {
+core.decision_tables = function () {
 
     var ts = $( 'table' ).filter( function() {         
     
@@ -85,7 +89,7 @@ var decision_tables = function () {
                 var text = $(this).html();
                 return ! text.match( /^(comment|script|scenario|import|setup|tear ?down)$/i ) && 
                         text !== "" &&
-                        ! getQuery( text ) &&
+                        ! core.getQuery( text ) &&
                         ! text.match( /[<>]/ );                
             }).length !== 0;         
             
@@ -93,7 +97,7 @@ var decision_tables = function () {
         
     var res = [];    
     ts.each( function () {    
-        res.push( { name: get_name( $(this).parent().find( 'td:even' ) ), td: $(this) } );    
+        res.push( { name: core.get_name( $(this).parent().find( 'td:even' ) ), td: $(this) } );    
     }
     );    
 
@@ -101,7 +105,7 @@ var decision_tables = function () {
     
 };
 
-var script_scenarios = function (scr) {
+core.script_scenarios = function (scr) {
 
     var $tr = scr.find( 'tr:eq(0)' ).nextAll();
     
@@ -121,7 +125,7 @@ var script_scenarios = function (scr) {
         else {
         
             var selector =  text.match( '^[\$].*=$' ) || text.match( /^(show|check|reject|ensure)$/i ) ? 'td:odd' : 'td:even';  
-            res.push( { name: get_name( $(this).find( selector ) ), td: $td0 } );        
+            res.push( { name: core.get_name( $(this).find( selector ) ), td: $td0 } );       
         
         }
         
@@ -131,9 +135,9 @@ var script_scenarios = function (scr) {
     
 };
 
-var parse_calls = function () {
+core.parse_calls = function () {
     
-    var all = all_scenarios();
+    var all = core.all_scenarios();
     
     var arr = {};
     var funcs = {};
@@ -148,21 +152,21 @@ var parse_calls = function () {
         }
     }
 
-    $.each( script_calls(), parser );    
-    $.each( decision_tables(), parser);    
-    $.each( query_tables(), parser);
+    $.each( core.page_calls(), parser );    
+    $.each( core.decision_tables(), parser);    
+    $.each( core.query_tables(), parser);
     
     return { scenario_calls: create_array( arr ), func_calls: create_array( funcs) };
 };
 
-var script_calls = function () {
+core.page_calls = function () {
 
-    var all = scripts();    
+    var all = core.scripts();    
     res = [];    
     
     all.each( function () {
     
-        var sns = script_scenarios( $(this) );
+        var sns = core.script_scenarios( $(this) );
         
         $.each( sns, function (i,val) {
             res.push( val );
