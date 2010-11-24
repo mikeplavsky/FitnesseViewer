@@ -31,6 +31,8 @@ var show_list = function ( res, list, id ) {
 	$( '.fv-scenario' ).click( function() { open_scenario( all, $(this) ); } );
 	
 	$( '.fv-selected-table' ).removeClass( 'fv-selected-table' );	
+    $( '.fv-selected-row' ).removeClass( 'fv-selected-row' );
+    
 	$( '#' + id ).addClass( 'fv-selected-view' );
 };
 
