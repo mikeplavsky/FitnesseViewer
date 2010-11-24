@@ -6,7 +6,7 @@ core.scenarios = function () {
     return $( 'table' ).find( 'td:eq(0)' ).filter( function () { return $(this).text().match( /^scenario$/i ); }  );    
 };
 
-core.get_name = function ($row) {
+core.get_name = function ($row, checked) {
     
     var res = [];
     
@@ -14,6 +14,8 @@ core.get_name = function ($row) {
         res[i] = $(this).text();
     }        
     );    
+    
+    checked && res.pop();
     
     return res.join( ' ' ).replace( /[_|_$]/g, '' ).replace( / {2,}/g, ' ' ).trim();
 };
@@ -124,8 +126,8 @@ core.script_scenarios = function (scr) {
         else if ( text.match( /^start$/i ) ) {}
         else {
         
-            var selector =  text.match( '^[\$].*=$' ) || text.match( /^(show|check|reject|ensure)$/i ) ? 'td:odd' : 'td:even';  
-            res.push( { name: core.get_name( $(this).find( selector ) ), td: $td0 } );       
+            var selector =  text.match( '^[\$].*=$' ) || text.match( /^(show|check|check not|reject|ensure)$/i ) ? 'td:odd' : 'td:even';  
+            res.push( { name: core.get_name( $(this).find( selector ), text.match( /^(check|check not)$/i ) ), td: $td0 } );       
         
         }
         
@@ -166,6 +168,8 @@ core.parse_calls = function () {
     $.each( core.decision_tables(), parser);    
     $.each( core.query_tables(), parser);
     
+    $.each( core.scenario_tables( arr ), parser ); 
+    
     return core.parse_calls.res = { scenario_calls: create_array( arr ), func_calls: create_array( funcs) };
 };
 
@@ -175,6 +179,31 @@ core.page_calls = function () {
     res = [];    
     
     all.each( function () {
+    
+        var sns = core.script_scenarios( $(this) );
+        
+        $.each( sns, function (i,val) {
+            res.push( val );
+        }                
+        );    
+    }    
+    );
+    
+    return res;
+    
+};
+
+core.scenario_tables = function (called) {
+
+    var all = [];
+
+    $.each( core.all_scenarios(), function (i,v) {        
+        called[i] && all.push( v.table );        
+    } );
+
+    var res = [];    
+    
+    all && $(all).each( function () {
     
         var sns = core.script_scenarios( $(this) );
         

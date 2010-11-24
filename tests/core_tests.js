@@ -82,7 +82,7 @@ test( 'getting all scenario calls from script tables', function () {
             
             '<tr><td>script',            
             '<tr><td>reject<td>create<td><td>farm',
-            '<tr><td>check<td>super farm',
+            '<tr><td>check<td>super farm<td><td>val',
             '<tr><td>Ensure<td>delete farm',
             '<tr><td>show<td>backup farm' 
             
@@ -97,11 +97,20 @@ test( 'getting all scenario calls from script tables', function () {
             '<tr><td>restore;<td><td>results',
             '<tr><td>Start<td>get data',            
             '<tr><td>$super=<td>get data' )            
+    )
+    .append( 
+    
+        table(
+        
+            '<tr><td>script',   
+            '<tr><td>check not<td>restored farm<td><td>val',
+            '<tr><td>check not<td>farm name<td><td>val'
+            )            
     );
 
     var scenarios = core.page_calls();
     
-    equals( 7, scenarios.length, 'number of calls'	);    
+    equals( 9, scenarios.length, 'number of calls'	);    
     
     equals( scenarios[ 0 ].name, 'create farm', 'reject should be skipped' );
     equals( scenarios[ 1 ].name, 'super farm', 'check should be skipped' );
@@ -111,6 +120,9 @@ test( 'getting all scenario calls from script tables', function () {
     equals( scenarios[ 4 ].name, 'restore results', 'two cells' );
     equals( scenarios[ 5 ].name, 'restore', '; at the end' );     
     equals( scenarios[ 6 ].name, 'get data', 'symbol should be skipped' );
+    
+    equals( scenarios[ 7 ].name, 'restored farm', 'check not should be skipped' );
+    equals( scenarios[ 8 ].name, 'farm name', 'last cell in check is not a part of scenario name' );
     
 });
 
