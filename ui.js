@@ -30,17 +30,14 @@ var show_list = function ( res, list, id ) {
     $( '.fv-view' ).click( function () { toggle_view( $(this) ) } );	
 	$( '.fv-scenario' ).click( function() { open_scenario( all, $(this) ); } );
 	
-	$( '.fv-selected-table' ).removeClass( 'fv-selected-table' );	
-    $( '.fv-selected-row' ).removeClass( 'fv-selected-row' );
+	$( '.fv-selected-table, .fv-selected-row' ).removeClass( 'fv-selected-table fv-selected-row' );	
     
 	$( '#' + id ).addClass( 'fv-selected-view' );
 };
 
 var open_scenario = function(all, $el) {	
 
-	$( '.fv-selected-table, .fv-selected-scenario' ).removeClass( 'fv-selected-table fv-selected-scenario' );		
-    $( '.fv-selected-row' ).removeClass( 'fv-selected-row' );		
-    $( '.hidden' ).removeClass( 'hidden' );
+	$( '.fv-selected-table, .fv-selected-scenario, .fv-selected-row, .hidden' ).removeClass( 'fv-selected-table fv-selected-scenario fv-selected-row hidden' );
 	
 	$el.addClass( 'fv-selected-scenario' );
 
@@ -61,15 +58,14 @@ var open_scenario = function(all, $el) {
 	
     var sc = all[ $el.text() ];
     
-	var table = sc.table;
+	var table = sc.table.addClass( 'fv-selected-table');
 	var x = table.offset().top - 100;
 	
-	table.addClass( 'fv-selected-table');
 	$('body').animate( {scrollTop: x}, 500);    
     
     sc.back_links && $.each( sc.back_links, function (i,v) {
         $( v.td ).parent().addClass( 'fv-selected-row' ); 
-    } );
+    });
 
 };
 

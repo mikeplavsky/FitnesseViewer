@@ -145,32 +145,32 @@ core.parse_calls = function () {
     
     var all = core.all_scenarios();
     
-    var arr = {};
+    var used = {};
     var funcs = {};
     
-    var parser = function(i,v) {
+    var parser = function() {
+    
+        var scenario = all[this.name];
 	
-		if ( all[v.name] ) {
+		if ( scenario ) {
             
-            arr[v.name] = { name : v.name };       
+            used[ this.name ] = { name : this.name };            
          
-            all[v.name].back_links || (all[v.name].back_links = []);            
-            all[v.name].back_links.push(v);
+            scenario.back_links || (scenario.back_links = []);            
+            scenario.back_links.push(this);
         }
         else {
         
-            funcs[v.name] = { name : v.name };
+            funcs[this.name] = { name : this.name };
             
         }
     }
-
-    $.each( core.page_calls(), parser );    
-    $.each( core.decision_tables_calls(), parser);    
-    $.each( core.query_tables_calls(), parser);
     
-    $.each( core.scenario_tables_calls( arr ), parser ); 
+    $.each( [ core.page_calls, core.decision_tables_calls, core.query_tables_calls, function() { return core.scenario_tables_calls( used ) } ], function () { 
+        $.each( this(), parser);
+    });
     
-    return core.parse_calls.res = { scenario_calls: create_array( arr ), func_calls: create_array( funcs) };
+    return core.parse_calls.res = { scenario_calls: create_array( used ), func_calls: create_array( funcs) };
 };
 
 core.page_calls = function () {
@@ -182,8 +182,8 @@ core.page_calls = function () {
     
         var sns = core.script_scenarios( $(this) );
         
-        $.each( sns, function (i,val) {
-            res.push( val );
+        $.each( sns, function () {
+            res.push( this );
         }                
         );    
     }    
@@ -198,8 +198,8 @@ core.scenario_tables_calls = function (called) {
     var first_lv = [];
     var all_scenarios = core.all_scenarios()
 
-    $.each( all_scenarios, function (i,v) {        
-        called[i] && first_lv.push( v.table );        
+    $.each( all_scenarios, function () {        
+        called[this.name] && first_lv.push( this.table );        
     } );
 
     var res = [];    
@@ -212,10 +212,10 @@ core.scenario_tables_calls = function (called) {
         
             var sns = core.script_scenarios( $(this) );
             
-            $.each( sns, function (i,val) {
+            $.each( sns, function () {
                 
-                res.push( val );
-                all_scenarios[ val.name ] && nested_lv.push( all_scenarios[ val.name ].table ); 
+                res.push( this );
+                all_scenarios[ this.name ] && nested_lv.push( all_scenarios[ this.name ].table ); 
                 
             }                
             );    
