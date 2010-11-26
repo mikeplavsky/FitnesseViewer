@@ -33,6 +33,7 @@ var show_list = function ( res, list, id ) {
 	$( '.fv-selected-table, .fv-selected-row' ).removeClass( 'fv-selected-table fv-selected-row' );	
     
 	$( '#' + id ).addClass( 'fv-selected-view' );
+    
 };
 
 var open_scenario = function(all, $el) {	
@@ -63,8 +64,8 @@ var open_scenario = function(all, $el) {
 	
 	$('body').animate( {scrollTop: x}, 500);    
     
-    sc.back_links && $.each( sc.back_links, function (i,v) {
-        $( v.td ).parent().addClass( 'fv-selected-row' ); 
+    sc.back_links && $.each( sc.back_links, function () {
+        $( this.td ).parent().addClass( 'fv-selected-row' ); 
     });
 
 };
