@@ -7,7 +7,10 @@ var toggle_scenarios = function () {
     if ( $( '#fv-scenarios' ).children().length !== 0 ) {
         
         $( '#fv-scenarios' ).hide();
-        $( '#fv-scenarios' ).empty();    
+        $( '#fv-scenarios' ).empty();   
+
+        collapse_all_scenarios();
+        
         return;
         
     }
@@ -19,6 +22,8 @@ var toggle_scenarios = function () {
 };
 
 var show_list = function ( res, list, id ) {
+
+    expand_all_scenarios();
 
     $( '#fv-scenarios' ).empty();    
     sortBy( list, 'name' );    
@@ -34,15 +39,39 @@ var show_list = function ( res, list, id ) {
     
 	$( '#' + id ).addClass( 'fv-selected-view' );
     
+    $.each(list, function() {    
+        all[this.name] && all[this.name].table.addClass( 'fv-selected-table' );    
+    });
+    
+    all[ list[0].name ] && position_to_scenario( all[ list[0].name ] );
+    
 };
 
-var open_scenario = function(all, $el) {	
+var collapse_all_scenarios = function () {
 
-	$( '.fv-selected-table, .fv-selected-scenario, .fv-selected-row, .hidden' ).removeClass( 'fv-selected-table fv-selected-scenario fv-selected-row hidden' );
-	
-	$el.addClass( 'fv-selected-scenario' );
+    $( '.fv-selected-table, .fv-selected-scenario, .fv-selected-row' ).removeClass( 'fv-selected-table fv-selected-scenario fv-selected-row' );
 
-	var gif = '/files/images/collapsableOpen.gif';
+    var gif = '/files/images/collapsableClosed.gif';
+
+	$( 'div[class=collapsable]' )
+	.attr( 'class', 'hidden' )
+	.find( 'img' )
+		.attr( 'src',  gif )
+	.end()
+	.each(
+		
+		function () {
+			$(this).prevAll( 'a' ).find( 'img' ).attr( 'src', gif );			
+		}
+		
+	);
+}
+
+var expand_all_scenarios = function () {
+
+    $( '.fv-selected-table, .fv-selected-scenario, .fv-selected-row' ).removeClass( 'fv-selected-table fv-selected-scenario fv-selected-row' );
+    
+    var gif = '/files/images/collapsableOpen.gif';
 
 	$( 'div[class=hidden]' )
 	.attr( 'class', 'collapsable' )
@@ -55,16 +84,32 @@ var open_scenario = function(all, $el) {
 			$(this).prevAll( 'a' ).find( 'img' ).attr( 'src', gif );			
 		}
 		
-	);		
-	
-    var sc = all[ $el.text() ];
-    
-	var table = sc.table.addClass( 'fv-selected-table');
+	);
+
+    $( '.hidden' ).removeClass( 'hidden' );
+
+}
+
+var position_to_scenario = function (scenario) {
+
+    var table = scenario.table.addClass( 'fv-selected-table');
 	var x = table.offset().top - 100;
 	
-	$('body').animate( {scrollTop: x}, 500);    
+	$('body').animate( {scrollTop: x}, 500);        
+
+}
+
+var open_scenario = function(all, $el) {	
+
+	expand_all_scenarios();
+	
+	$el.addClass( 'fv-selected-scenario' );
+
+	var sc = all[ $el.text() ];
     
-    sc.back_links && $.each( sc.back_links, function () {
+    sc && position_to_scenario( sc );
+    
+	sc && sc.back_links && $.each( sc.back_links, function () {
         $( this.td ).parent().addClass( 'fv-selected-row' ); 
     });
 
