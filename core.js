@@ -195,24 +195,37 @@ core.page_calls = function () {
 
 core.scenario_tables = function (called) {
 
-    var all = [];
+    var first_lv = [];
+    var all_scenarios = core.all_scenarios()
 
-    $.each( core.all_scenarios(), function (i,v) {        
-        called[i] && all.push( v.table );        
+    $.each( all_scenarios, function (i,v) {        
+        called[i] && first_lv.push( v.table );        
     } );
 
     var res = [];    
     
-    all && $(all).each( function () {
+    var wind_it_up = function (level) {
     
-        var sns = core.script_scenarios( $(this) );
+        var nested_lv = [];
+    
+        level && $(level).each( function () {
         
-        $.each( sns, function (i,val) {
-            res.push( val );
-        }                
-        );    
-    }    
-    );
+            var sns = core.script_scenarios( $(this) );
+            
+            $	.each( sns, function (i,val) {
+                
+                res.push( val );
+                all_scenarios[ val.name ] && nested_lv.push( all_scenarios[ val.name ].table ); 
+                
+            }                
+            );    
+        }    
+        );
+        
+        nested_lv.length > 0 && wind_it_up( nested_lv );
+    };
+    
+    wind_it_up( first_lv );
     
     return res;
     

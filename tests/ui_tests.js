@@ -11,9 +11,18 @@ module( 'ui', {
 		.append( 
 		
 			fitnesse.ui.scenario_library( 			
-			{ scenarios: [{name: "Add Farms" },{name: "Remove Backup"},{name: "Check Services" }, {name: "Add File" }] }		
+			{ scenarios: 
+                        ['Add Farms','Remove Backup','Check Services','Add File','Restore Site','Restore Site Collection', 
+                         'Stop Services','Restart Lab','Check SQL Server','Check AD','Check Registry'] }		
 			)
 		)
+        .append(
+            
+            fitnesse.ui.complex_scenario ( {scenario: { name: "Restore DB", calls: [ 'Check SQL Server', 'Check AD' ] } } ),
+            fitnesse.ui.complex_scenario ( {scenario: { name: "Restore Web Application", calls: [ 'Restore Site Collection', 'Restore Site' ] } } ),
+            fitnesse.ui.complex_scenario ( {scenario: { name: "Restore Farm", calls: [ 'Check Services', 'Restore Web Application', 'Restore DB' ] } } )
+            
+        )
 		.append(
 		
 			fitnesse.ui.scripts( 			
@@ -23,6 +32,7 @@ module( 'ui', {
 					[["Add File"]],
 					[["call PowerShell"],["Call Python"]],
                     [["Add File"]],
+                    [["Restore Farm"]]
 					
 				]} 		
 			)
@@ -51,15 +61,15 @@ test( 'when clicking adress bar icon scenarios ui is either shown or hidden', fu
 
 test( 'switching between views', function () {
 	
-	ok( $( '#fv-view-all' ).text().match( /4/ ), 'number of discovered scenarios' );
+	ok( $( '#fv-view-all' ).text().match( /14/ ), 'number of discovered scenarios' );
 	
 	$( '#fv-view-all' ).click();
 	
-	equals( $( '.fv-scenario' ).length, 4, 'all discovered scenarios' );
+	equals( $( '.fv-scenario' ).length, 14, 'all discovered scenarios' );
 	ok( $( '#fv-view-all' ).hasClass( 'fv-selected-view' ), 'view all must be selected'  );
 	
 	$( '#fv-view-used' ).click();
-	equals( $( '.fv-scenario' ).length, 3, 'used scenarios' );
+	equals( $( '.fv-scenario' ).length, 11, 'used scenarios' );
 	equals( $( '.fv-selected-view' ).length, 1, 'just one view is selected' ) 
 	ok( $( '#fv-view-used' ).hasClass( 'fv-selected-view' ), 'view used must be selected'  );
 	

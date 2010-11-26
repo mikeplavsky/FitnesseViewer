@@ -7,8 +7,29 @@
 	<table>
 		<tr>
 			<td>Scenario</td>
+			<td>{$scenario}</td>
+		</tr>
+	</table>
+{/template}
+
+/**
+* @param scenario
+**/
+{template .complex_scenario}
+	<table>
+		<tr>
+			<td>Scenario</td>
 			<td>{$scenario.name}</td>
 		</tr>
+        
+       {foreach $c in $scenario.calls}
+		
+       <tr>
+           <td>{$c}</td> 
+       </tr>
+            
+		{/foreach}
+        
 	</table>
 {/template}
 
