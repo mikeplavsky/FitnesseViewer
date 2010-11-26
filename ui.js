@@ -9,9 +9,7 @@ var toggle_scenarios = function () {
         $( '#fv-scenarios' ).hide();
         $( '#fv-scenarios' ).empty();   
 
-        collapse_all_scenarios();
-        
-        return;
+         return;
         
     }
     
@@ -22,8 +20,6 @@ var toggle_scenarios = function () {
 };
 
 var show_list = function ( res, list, id ) {
-
-    expand_all_scenarios();
 
     $( '#fv-scenarios' ).empty();    
     sortBy( list, 'name' );    
@@ -37,35 +33,9 @@ var show_list = function ( res, list, id ) {
 	
 	$( '.fv-selected-table, .fv-selected-row' ).removeClass( 'fv-selected-table fv-selected-row' );	
     
-	$( '#' + id ).addClass( 'fv-selected-view' );
-    
-    $.each(list, function() {    
-        all[this.name] && all[this.name].table.addClass( 'fv-selected-table' );    
-    });
-    
-    all[ list[0].name ] && position_to_scenario( all[ list[0].name ] );
+	$( '#' + id ).addClass( 'fv-selected-view' );    
     
 };
-
-var collapse_all_scenarios = function () {
-
-    $( '.fv-selected-table, .fv-selected-scenario, .fv-selected-row' ).removeClass( 'fv-selected-table fv-selected-scenario fv-selected-row' );
-
-    var gif = '/files/images/collapsableClosed.gif';
-
-	$( 'div[class=collapsable]' )
-	.attr( 'class', 'hidden' )
-	.find( 'img' )
-		.attr( 'src',  gif )
-	.end()
-	.each(
-		
-		function () {
-			$(this).prevAll( 'a' ).find( 'img' ).attr( 'src', gif );			
-		}
-		
-	);
-}
 
 var expand_all_scenarios = function () {
 
