@@ -179,7 +179,7 @@ test( 'parsing of query tables', function () {
     .append( table( '<tr><td>Ordered Query:Add Farm' ) );
     
     
-    var all = core.query_tables();
+    var all = core.query_tables_calls();
     
     equals( all.length, 4, 'found query tables' ); 
     
@@ -207,7 +207,7 @@ test( 'parsing of decision tables', function () {
     
     .append(table( '<tr><td>Query:create it' ) );
     
-    var all = core.decision_tables();
+    var all = core.decision_tables_calls();
     
     equals( all.length, 2, 'found decision tables' );
     

@@ -63,7 +63,7 @@ core.getQuery = function (text) {
     return text.match( /^(?:Subset|Ordered)? *Query:(.+)/i );
 };
 
-core.query_tables = function () {
+core.query_tables_calls = function () {
 
     var res = [];   
 
@@ -82,7 +82,7 @@ core.query_tables = function () {
 
 };
 
-core.decision_tables = function () {
+core.decision_tables_calls = function () {
 
     var ts = $( 'table' ).filter( function() {         
     
@@ -165,10 +165,10 @@ core.parse_calls = function () {
     }
 
     $.each( core.page_calls(), parser );    
-    $.each( core.decision_tables(), parser);    
-    $.each( core.query_tables(), parser);
+    $.each( core.decision_tables_calls(), parser);    
+    $.each( core.query_tables_calls(), parser);
     
-    $.each( core.scenario_tables( arr ), parser ); 
+    $.each( core.scenario_tables_calls( arr ), parser ); 
     
     return core.parse_calls.res = { scenario_calls: create_array( arr ), func_calls: create_array( funcs) };
 };
@@ -193,7 +193,7 @@ core.page_calls = function () {
     
 };
 
-core.scenario_tables = function (called) {
+core.scenario_tables_calls = function (called) {
 
     var first_lv = [];
     var all_scenarios = core.all_scenarios()
@@ -212,7 +212,7 @@ core.scenario_tables = function (called) {
         
             var sns = core.script_scenarios( $(this) );
             
-            $	.each( sns, function (i,val) {
+            $.each( sns, function (i,val) {
                 
                 res.push( val );
                 all_scenarios[ val.name ] && nested_lv.push( all_scenarios[ val.name ].table ); 

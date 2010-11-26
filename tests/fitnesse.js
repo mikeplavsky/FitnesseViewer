@@ -7,14 +7,14 @@ if (typeof fitnesse.ui == 'undefined') { fitnesse.ui = {}; }
 
 fitnesse.ui.scenario = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('\t<table><tr><td>Scenario</td><td>', soy.$$escapeHtml(opt_data.scenario), '</td></tr></table>');
+  output.append('\t<table><tr><td style="font-weight:bold">Scenario</td><td>', soy.$$escapeHtml(opt_data.scenario), '</td></tr></table>');
   if (!opt_sb) return output.toString();
 };
 
 
 fitnesse.ui.complex_scenario = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('\t<table><tr><td>Scenario</td><td>', soy.$$escapeHtml(opt_data.scenario.name), '</td></tr>');
+  output.append('\t<table><tr><td style="font-weight:bold">Scenario</td><td>', soy.$$escapeHtml(opt_data.scenario.name), '</td></tr>');
   var cList10 = opt_data.scenario.calls;
   var cListLen10 = cList10.length;
   for (var cIndex10 = 0; cIndex10 < cListLen10; cIndex10++) {
@@ -28,7 +28,7 @@ fitnesse.ui.complex_scenario = function(opt_data, opt_sb) {
 
 fitnesse.ui.script = function(opt_data, opt_sb) {
   var output = opt_sb || new soy.StringBuilder();
-  output.append('\t<table><tr><td>Script</td></tr>');
+  output.append('\t<table><tr><td style="font-weight:bold">Script</td></tr>');
   var sList18 = opt_data.scenarios;
   var sListLen18 = sList18.length;
   for (var sIndex18 = 0; sIndex18 < sListLen18; sIndex18++) {
