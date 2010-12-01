@@ -60,21 +60,43 @@ test( 'when clicking adress bar icon scenarios ui is either shown or hidden', fu
 });
 
 test( 'switching between views', function () {
+
+    var check_view = function (id,num,msg) {
+        same( $( id ).text().match( /\d*$/ )[0], num, msg );
+    };
 	
-	same( $( '#fv-view-all' ).text().match( /\d\d/ )[0], "14", 'number of discovered scenarios' );
+	check_view( '#fv-view-all', "14", 'number of discovered scenarios' );
+    check_view( '#fv-view-used', "11", 'number of used scenarios' );
+    check_view( '#fv-view-unused', "3", 'number of unused scenarios' );
+    
+    var click_view = function (id, num,msg) {
+    
+        $( id ).click();	
+        equals( $( '.fv-scenario' ).length, num, msg );   
+        ok( $( id ).hasClass( 'fv-selected-view' ), 'appropriate view must be selected'  );
+        equals( $( '.fv-selected-view' ).length, 1, 'just one view is selected' ) 
+        
+    };
+    
+    var check_scenario = function (arr) {
+        
+        $('.fv-scenario' ).each( function (i) {
+            i < arr.length && same( $(this).text(), arr[i], "right scenario name" );
+        });
+    
+    };
+    
+    click_view( '#fv-view-all', 14, 'all discovered scenarios' );    
+    check_scenario( ['Add Farms', 'Add File', 'Check AD', 'Check Registry' ] );
 	
-	$( '#fv-view-all' ).click();
+	click_view('#fv-view-used', 11, 'used scenarios' );    
+    check_scenario( ['Add Farms', 'Add File', 'Check AD', 'Check SQL Server' ] );
+    
+    click_view( '#fv-view-unused', 3, 'unused scenarios' );
+    check_scenario( ['Check Registry', 'Restart Lab', 'Stop Services' ] );
 	
-	equals( $( '.fv-scenario' ).length, 14, 'all discovered scenarios' );
-	ok( $( '#fv-view-all' ).hasClass( 'fv-selected-view' ), 'view all must be selected'  );
-	
-	$( '#fv-view-used' ).click();
-	equals( $( '.fv-scenario' ).length, 11, 'used scenarios' );
-	equals( $( '.fv-selected-view' ).length, 1, 'just one view is selected' ) 
-	ok( $( '#fv-view-used' ).hasClass( 'fv-selected-view' ), 'view used must be selected'  );
-	
-	$( '#fv-view-funcs' ).click();
-	equals( $( '.fv-scenario' ).length, 2, 'used functions' );
+	click_view( '#fv-view-funcs', 2, 'used functions' );
+    check_scenario( ['Call Python', 'call PowerShell' ] );
 	
 });
 
