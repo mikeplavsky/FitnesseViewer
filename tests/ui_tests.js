@@ -51,7 +51,7 @@ module( 'ui', {
 test( 'when clicking adress bar icon scenarios ui is either shown or hidden', function () {
 	
 	equals( $( '#fv-header' ).length, 1, 'header of Scenario Panel');
-	equals( $( '#fv-header' ).find( '.fv-view' ).length, 3, 'views of Scenario Panel' );
+	equals( $( '#fv-header' ).find( '.fv-view' ).length, 4, 'views of Scenario Panel' );
 	
 	toggle_scenarios();	
 	

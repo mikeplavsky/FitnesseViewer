@@ -2,6 +2,7 @@
 
 /**
 * @param scenarios
+* @param unused_scenarios
 * @param all_scenarios
 * @param functions
 * @param list
@@ -11,13 +12,16 @@
     <div id="fv-header">
     
        <div class="fv-view" id="fv-view-all">         
-         All Scenarios: {$all_scenarios.length}
+         All Scenarios: {$all_scenarios}
        </div>
        <div class="fv-view" id="fv-view-used">
-         Used Scenarios: {$scenarios.length}
+         Used Scenarios: {$scenarios}
+       </div>
+       <div class="fv-view" id="fv-view-unused">
+         Unused Scenarios: {$unused_scenarios}
        </div>
        <div class="fv-view" id="fv-view-funcs"> 
-         Called Functions: {$functions.length}
+         Called Functions: {$functions}
        </div>
          
     </div>
@@ -26,7 +30,7 @@
     
     {foreach  $s in $list}
     <div class="fv-scenario">
-        {$s.name}
+        {$s}
     </div>
     {/foreach}
     

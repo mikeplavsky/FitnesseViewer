@@ -24,7 +24,18 @@ var show_list = function ( res, list, id ) {
     $( '#fv-scenarios' ).empty();    
     sortBy( list, 'name' );    
     
-    $( '#fv-scenarios' ).append( $( fitnesse.viewer.scenarios( { scenarios : res.scenario_calls, all_scenarios : create_array( core.all_scenarios() ), functions: res.func_calls, list:  list } ) ) );    
+    var all = create_array( core.all_scenarios() ).length;
+    var used = res.scenario_calls.length;
+    
+    $( '#fv-scenarios' ).append( $( fitnesse.viewer.scenarios({ 
+                        
+                          all_scenarios : all,   
+                          scenarios : used,
+                          unused_scenarios : all - used, 
+                          functions: res.func_calls.length,                          
+                          list:  list 
+                        
+                        })));    
     
     var all = core.all_scenarios();
     
@@ -96,7 +107,7 @@ var toggle_view = function ($el) {
         case 'fv-view-all':
         
             var arr = [];
-            $.each( core.all_scenarios(), function (x) { arr.push( {name : x} ) } );
+            $.each( core.all_scenarios(), function (x) { arr.push( x ) } );
 
             show_list(res, arr, id );         
             
@@ -105,6 +116,18 @@ var toggle_view = function ($el) {
         case 'fv-view-used':
         
             show_list(res, res.scenario_calls, id ); 
+            break;
+            
+        case 'fv-view-unused':
+        
+            var arr = [];
+            
+            $.each( core.all_scenarios(), function (x) {                 
+                (res.scenario_calls.indexOf(x) == -1) && arr.push( x )                 
+            });
+
+            show_list(res, arr, id );   
+            
             break;
             
         case 'fv-view-funcs':

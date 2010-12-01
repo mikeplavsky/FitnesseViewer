@@ -154,14 +154,14 @@ core.parse_calls = function () {
 	
 		if ( scenario ) {
             
-            used[ this.name ] = { name : this.name };            
+            used[ this.name ] = this.name;            
          
             scenario.back_links || (scenario.back_links = []);            
             scenario.back_links.push(this);
         }
         else {
         
-            funcs[this.name] = { name : this.name };
+            funcs[this.name] = this.name;
             
         }
     }
