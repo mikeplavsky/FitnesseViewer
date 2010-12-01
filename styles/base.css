@@ -18,6 +18,11 @@
 
 #fv-scenarios {
 
+    font-family: 'Lucida Grande', 'Bitstream Vera Sans', 'trebuchet ms', verdana, tahoma, arial, sans-serif;
+    font-size: 1em;
+
+    width:200px;
+
     position: fixed;
     right: 0;
     top: 0;
@@ -71,6 +76,7 @@
 }
 
 .fv-view {
+    margin: 0 7px;
     cursor: pointer;
 }
 

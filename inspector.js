@@ -2,7 +2,7 @@ if ( $( 'link' ).filter( function() { return $(this).attr( 'href' ).match( 'fitn
 
 chrome.extension.sendRequest( { name: "showPageAction" }, function(){} );
 
-document.body.insertBefore( $( '<div id="fv-scenarios" style="display:none;width:200px;">' )[0] );
+document.body.insertBefore( $( '<div id="fv-scenarios" style="display:none;">' )[0] );
 
 chrome.extension.onRequest.addListener(
 

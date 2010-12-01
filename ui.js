@@ -22,7 +22,7 @@ var toggle_scenarios = function () {
 var show_list = function ( res, list, id ) {
 
     $( '#fv-scenarios' ).empty();    
-    sortBy( list, 'name' );    
+    list.sort();
     
     var all = create_array( core.all_scenarios() ).length;
     var used = res.scenario_calls.length;
