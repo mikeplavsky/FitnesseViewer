@@ -98,6 +98,7 @@ var open_scenario = function(all, $el) {
 
 
 var toggle_view = function ($el) {
+    "use strict"
 
 	var res = core.parse_calls();
 	var id = $el.attr( 'id' );

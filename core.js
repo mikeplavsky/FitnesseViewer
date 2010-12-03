@@ -176,7 +176,7 @@ core.parse_calls = function () {
 core.page_calls = function () {
 
     var all = core.scripts();    
-    res = [];    
+    var res = [];    
     
     all.each( function () {
     
