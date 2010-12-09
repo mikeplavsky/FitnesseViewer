@@ -87,12 +87,32 @@ var open_scenario = function(all, $el) {
 	$el.addClass( 'fv-selected-scenario' );
 
 	var sc = all[ $el.text() ];
+	
+	if (sc) {
     
-    sc && position_to_scenario( sc );
+		position_to_scenario( sc );
     
-	sc && sc.back_links && $.each( sc.back_links, function () {
-        $( this.td ).parent().addClass( 'fv-selected-row' ); 
-    });
+		sc.back_links && $.each( sc.back_links, function () {
+			$( this.td ).parent().addClass( 'fv-selected-row' ); 
+		});
+		
+	}
+	else { 
+	
+		var f = core.parse_calls.res.funcs[ $el.text() ];
+		
+		if ( f.back_links ) {
+		
+			f.back_links && $.each( f.back_links, function () {
+				$( this.td ).parent().addClass( 'fv-selected-row' ); 
+			});
+		
+			var $td = f.back_links[0].td;
+			
+			var x = $td.offset().top - 100;	
+			$('body').animate( {scrollTop: x}, 500);        
+		}
+	}
 
 };
 

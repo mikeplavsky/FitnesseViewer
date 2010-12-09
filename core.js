@@ -17,7 +17,7 @@ core.get_name = function ($row, checked) {
     
     checked && res.pop();
     
-    return res.join( ' ' ).replace( /[_|_$]/g, '' ).replace( / {2,}/g, ' ' ).trim();
+    return res.join( ' ' ).replace( /_$/g, '' ).replace( /_/g, ' ' ).replace( / {2,}/g, ' ' ).trim();
 };
 
 core.scenario_name = function(sc) {
@@ -147,6 +147,8 @@ core.parse_calls = function () {
     
     var used = {};
     var funcs = {};
+	
+	var all_funcs = {};
     
     var parser = function() {
     
@@ -162,7 +164,12 @@ core.parse_calls = function () {
         else {
         
             funcs[this.name] = this.name;
-            
+			
+			all_funcs[ this.name ] || (all_funcs[ this.name ] = {});
+			var f = all_funcs[ this.name ]
+			
+            f.back_links || (f.back_links = []);
+			f.back_links.push( this );
         }
     }
     
@@ -170,7 +177,7 @@ core.parse_calls = function () {
         $.each( this(), parser);
     });
     
-    return core.parse_calls.res = { scenario_calls: create_array( used ), func_calls: create_array( funcs) };
+    return core.parse_calls.res = { scenario_calls: create_array( used ), func_calls: create_array( funcs), funcs: all_funcs };
 };
 
 core.page_calls = function () {

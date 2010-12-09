@@ -46,16 +46,19 @@ test( 'getting scenario names', function () {
     .append( table( '<td>scenario<td>create<td><td>farm' ) )
 	.append( table( '<td>scenario<td>create _   super _  site_' ) )
 	.append( table( '<td>scenario<td>create site_' ) )
-	.append( table( '<td>scenario<td>create     site_' ) );;
+	.append( table( '<td>scenario<td>create     site_' ) )
+	.append( table( '<td>scenario<td>setup_ad_' ) );
     
     var all = core.scenarios();
 	
-	same( create_array( core.all_scenarios() ).length, 4, 'should not count scenario twice' );
+	same( create_array( core.all_scenarios() ).length, 5, 'should not count scenario twice' );
     
     same( core.scenario_name( all.eq( 0 ) ), 'first', 'simple name: one cell' );    
     same( core.scenario_name( all.eq( 1 ) ), 'create farm', 'scenario name scattered through several cells'	);		
-	same( core.scenario_name( all.eq( 2 ) ), 'create super site', 'scenario name can contain underscores'	);
-	same( core.scenario_name( all.eq( 3 ) ), 'create site', 'scenario name can contain underscores'	);
+	same( core.scenario_name( all.eq( 2 ) ), 'create super site', 'scenario name can contain underscores with spaces'	);
+	same( core.scenario_name( all.eq( 3 ) ), 'create site', 'scenario name can contain underscores at the end'	);
+	same( core.scenario_name( all.eq( 4 ) ), 'create site', 'scenario name can contain underscores at the end and several spaces'	);
+	same( core.scenario_name( all.eq( 5 ) ), 'setup ad', 'scenario name can contain underscores'	);
 	
 	
 });
