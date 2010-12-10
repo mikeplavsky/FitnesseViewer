@@ -71,11 +71,9 @@ var expand_all_scenarios = function () {
 
 }
 
-var position_to_scenario = function (scenario) {
+var position_to_obj = function (obj) {
 
-    var table = scenario.table.addClass( 'fv-selected-table');
-	var x = table.offset().top - 100;
-	
+    var x = obj.offset().top - 100;	
 	$('body').animate( {scrollTop: x}, 500);        
 
 }
@@ -88,13 +86,20 @@ var open_scenario = function(all, $el) {
 
 	var sc = all[ $el.text() ];
 	
+	function highlight_rows(obj) {
+		
+		obj.back_links && $.each( obj.back_links, function () {
+			$( this.td ).parent().addClass( 'fv-selected-row' ); 
+		});		
+		
+	}
+	
 	if (sc) {
     
-		position_to_scenario( sc );
-    
-		sc.back_links && $.each( sc.back_links, function () {
-			$( this.td ).parent().addClass( 'fv-selected-row' ); 
-		});
+		sc.table.addClass( 'fv-selected-table');
+		
+		position_to_obj( sc.table );  		
+		highlight_rows(sc);
 		
 	}
 	else { 
@@ -103,21 +108,16 @@ var open_scenario = function(all, $el) {
 		
 		if ( f.back_links ) {
 		
-			f.back_links && $.each( f.back_links, function () {
-				$( this.td ).parent().addClass( 'fv-selected-row' ); 
-			});
-		
-			var $td = f.back_links[0].td;			
-			var x = $td.offset().top;
+			var x = f.back_links[0].td;
 			
 			$.each( f.back_links, function () {
-				if ( this.td.offset().top < x ) {
-					x = this.td.offset().top;
+				if ( this.td.offset().top < x.offset().top ) {
+					x = this.td;
 				};
 			});
 			
-			x = x - 100;	
-			$('body').animate( {scrollTop: x}, 500);        
+			position_to_obj( x );
+			highlight_rows(f);
 		}
 	}
 

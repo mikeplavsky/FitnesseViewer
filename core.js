@@ -148,28 +148,29 @@ core.parse_calls = function () {
     var used = {};
     var funcs = {};
 	
-	var all_funcs = {};
+	var used_funcs = {};
     
     var parser = function() {
+	
+		function add_link(obj,link) {
+			obj.back_links || (obj.back_links = []);            
+            obj.back_links.push(link);
+		}
     
         var scenario = all[this.name];
 	
 		if ( scenario ) {
             
-            used[ this.name ] = this.name;            
-         
-            scenario.back_links || (scenario.back_links = []);            
-            scenario.back_links.push(this);
+            used[ this.name ] = this.name;
+            add_link( scenario, this );
+			
         }
         else {
         
             funcs[this.name] = this.name;
 			
-			all_funcs[ this.name ] || (all_funcs[ this.name ] = {});
-			var f = all_funcs[ this.name ]
-			
-            f.back_links || (f.back_links = []);
-			f.back_links.push( this );
+			used_funcs[ this.name ] || (used_funcs[ this.name ] = {});
+			add_link( used_funcs[ this.name ], this );
         }
     }
     
@@ -177,7 +178,7 @@ core.parse_calls = function () {
         $.each( this(), parser);
     });
     
-    return core.parse_calls.res = { scenario_calls: create_array( used ), func_calls: create_array( funcs), funcs: all_funcs };
+    return core.parse_calls.res = { scenario_calls: create_array( used ), func_calls: create_array( funcs), funcs: used_funcs };
 };
 
 core.page_calls = function () {
@@ -237,20 +238,3 @@ core.scenario_tables_calls = function (called) {
     return res;
     
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
