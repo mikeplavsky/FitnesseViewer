@@ -107,9 +107,16 @@ var open_scenario = function(all, $el) {
 				$( this.td ).parent().addClass( 'fv-selected-row' ); 
 			});
 		
-			var $td = f.back_links[0].td;
+			var $td = f.back_links[0].td;			
+			var x = $td.offset().top;
 			
-			var x = $td.offset().top - 100;	
+			$.each( f.back_links, function () {
+				if ( this.td.offset().top < x ) {
+					x = this.td.offset().top;
+				};
+			});
+			
+			x = x - 100;	
 			$('body').animate( {scrollTop: x}, 500);        
 		}
 	}

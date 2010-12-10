@@ -13,14 +13,15 @@ module( 'ui', {
 			fitnesse.ui.scenario_library( 			
 			{ scenarios: 
                         ['Add Farms','Remove Backup','Check Services','Add File','Restore Site','Restore Site Collection', 
-                         'Stop Services','Restart Lab','Check SQL Server','Check AD','Check Registry'] }		
+                         'Stop Services','Restart Lab','Check SQL Server','Check AD'] }		
 			)
 		)
         .append(
-            
-            fitnesse.ui.complex_scenario ( {scenario: { name: "Restore DB", calls: [ 'Check SQL Server', 'Check AD' ] } } ),
-            fitnesse.ui.complex_scenario ( {scenario: { name: "Restore Web Application", calls: [ 'Restore Site Collection', 'Restore Site' ] } } ),
-            fitnesse.ui.complex_scenario ( {scenario: { name: "Restore Farm", calls: [ 'Check Services', 'Restore Web Application', 'Restore DB' ] } } )
+		
+		    fitnesse.ui.complex_scenario ( {scenario: { name: 'Check Registry', calls: [ 'Call SQL', 'Revert Lab' ] } } ),
+            fitnesse.ui.complex_scenario ( {scenario: { name: 'Restore DB', calls: [ 'Check SQL Server', 'Check AD' ] } } ),
+            fitnesse.ui.complex_scenario ( {scenario: { name: 'Restore Web Application', calls: [ 'Restore Site Collection', 'Restore Site' ] } } ),
+            fitnesse.ui.complex_scenario ( {scenario: { name: 'Restore Farm', calls: [ 'Check Services', 'Restore Web Application', 'Restore DB', 'call PowerShell' ] } } )
             
         )
 		.append(
@@ -115,7 +116,9 @@ test( 'scenario selection', function () {
 
 test ( 'showing scenario', function () {
 
-    $( '#fv_view_used' ).click();
+	$( '#fv-view-unused' ).click();
+    $( '#fv-view-used' ).click();
+	
     $( '.fv-scenario:eq(1)' ).click();
     
     same( $( '.fv-selected-table' ).length, 1, 'just one scenario selected' );
@@ -126,8 +129,20 @@ test ( 'showing scenario', function () {
     
 });
 
+test ( 'showing function', function () {
 
-
+	$( '#fv-view-unused' ).click();
+    $( '#fv-view-funcs' ).click();
+	
+    $( '.fv-scenario:eq(1)' ).click();
+    
+    same( $( '.fv-selected-table' ).length, 0, 'no scenario tables selected' );
+    same( $( '.fv-selected-row' ).length, 2, 'selected rows with function' );    
+	
+	same( $($( '.fv-selected-row' )[0]).closest( 'table' ).find( 'tr:eq(0)' ).find( 'td:eq(1)' ).text(), "Restore Farm", "function shown in scenario" );
+	same( $($( '.fv-selected-row' )[1]).closest( 'table' ).find( 'tr:eq(0)' ).find( 'td:eq(0)' ).text(), "Script", "function shown in script" );
+    
+});
 
 
 
