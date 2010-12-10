@@ -37,6 +37,17 @@
     
 }
 
+.fv-show-all {
+	display:none;
+	font-size: 60%;
+	cursor: pointer;
+}
+
+.fv-show-all:hover{
+	font-weight: bold;
+	color:rgb(120,255,120);
+}
+
 #fv-scenarios-list { 
     max-height: 300px;
     overflow: auto;    

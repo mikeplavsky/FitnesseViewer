@@ -38,13 +38,16 @@ var show_list = function ( res, list, id ) {
                         })));    
     
     var all = core.all_scenarios();
-    
-    $( '.fv-view' ).click( function () { toggle_view( $(this) ) } );	
+	
+	$( '.fv-view' ).click( function () { toggle_view( $(this) ) } );	
 	$( '.fv-scenario' ).click( function() { open_scenario( all, $(this) ); } );
 	
 	$( '.fv-selected-table, .fv-selected-row' ).removeClass( 'fv-selected-table fv-selected-row' );	
     
 	$( '#' + id ).addClass( 'fv-selected-view' );    
+	
+	$( '.fv-show-all' ).hide();
+	$( '#' + id ).find( '.fv-show-all' ).show();
     
 };
 
@@ -129,8 +132,8 @@ var toggle_view = function ($el) {
 
 	var res = core.parse_calls();
 	var id = $el.attr( 'id' );
-
-    switch (id) {
+	
+	switch (id) {
     
         case 'fv-view-all':
         

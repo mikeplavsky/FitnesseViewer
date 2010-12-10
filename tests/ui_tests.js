@@ -63,7 +63,7 @@ test( 'when clicking adress bar icon scenarios ui is either shown or hidden', fu
 test( 'switching between views', function () {
 
     var check_view = function (id,num,msg) {
-        same( $( id ).text().match( /\d*$/ )[0], num, msg );
+        same( $( id ).find('span:eq(0)').text().match( /\d*$/ )[0], num, msg );
     };
 	
 	check_view( '#fv-view-all', "14", 'number of discovered scenarios' );
