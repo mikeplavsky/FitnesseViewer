@@ -21,7 +21,7 @@
     font-family: 'Lucida Grande', 'Bitstream Vera Sans', 'trebuchet ms', verdana, tahoma, arial, sans-serif;
     font-size: 1em;
 
-    width:200px;
+    width:210px;
 
     position: fixed;
     right: 0;
@@ -44,8 +44,9 @@
 }
 
 .fv-show-all:hover{
-	font-weight: bold;
-	color:rgb(120,255,120);
+	#font-weight: bold;
+	font-size: 70%;
+	color:rgb(190,255,255);
 }
 
 #fv-scenarios-list { 

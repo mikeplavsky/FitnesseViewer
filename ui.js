@@ -48,7 +48,30 @@ var show_list = function ( res, list, id ) {
 	
 	$( '.fv-show-all' ).hide();
 	$( '#' + id ).find( '.fv-show-all' ).show();
+	
+	$( '.fv-show-all' ).click( function(e) { show_all( list ); e.stopPropagation(); } );
     
+};
+
+
+var show_all = function (list) {
+	
+	expand_all_scenarios();
+	
+	var obj = {offset: function() { return {top:9999}; }};
+	
+	$.each( list,  function () {		
+	
+		var curr = show_usage( this );
+		
+		if (curr.offset().top < obj.offset().top ) {
+			obj = curr;
+		}
+		
+	});
+	
+	position_to_obj( obj );
+	
 };
 
 var expand_all_scenarios = function () {
@@ -81,13 +104,10 @@ var position_to_obj = function (obj) {
 
 }
 
-var open_scenario = function(all, $el) {	
+var show_usage = function (text) {
 
-	expand_all_scenarios();
-	
-	$el.addClass( 'fv-selected-scenario' );
-
-	var sc = all[ $el.text() ];
+	var all = core.all_scenarios();
+	var sc = all[ text ];
 	
 	function highlight_rows(obj) {
 		
@@ -99,15 +119,15 @@ var open_scenario = function(all, $el) {
 	
 	if (sc) {
     
-		sc.table.addClass( 'fv-selected-table');
-		
-		position_to_obj( sc.table );  		
+		sc.table.addClass( 'fv-selected-table');		
 		highlight_rows(sc);
+		
+		return sc.table;
 		
 	}
 	else { 
 	
-		var f = core.parse_calls.res.funcs[ $el.text() ];
+		var f = core.parse_calls.res.funcs[ text ];
 		
 		if ( f.back_links ) {
 		
@@ -119,11 +139,21 @@ var open_scenario = function(all, $el) {
 				};
 			});
 			
-			position_to_obj( x );
 			highlight_rows(f);
+			
+			return x;
 		}
 	}
 
+}
+
+var open_scenario = function(all, $el) {	
+
+	expand_all_scenarios();	
+	$el.addClass( 'fv-selected-scenario' );
+
+	var obj = show_usage( $el.text() );
+	position_to_obj( obj );
 };
 
 
