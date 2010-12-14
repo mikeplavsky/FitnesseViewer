@@ -145,6 +145,49 @@ test ( 'showing function', function () {
 });
 
 
+test ( 'show all used functions', function () {
+
+	$( '#fv-view-unused' ).click();
+    $( '#fv-view-funcs' ).click();
+
+	same( $( '#fv-view-funcs .fv-show-all' ).css( 'display' ), 'inline', 'should be visible' );		
+	same( $( '#fv-view-unused .fv-show-all' ).css( 'display' ), 'none', 'should be hidden' );		
+	
+	$( '#fv-view-funcs .fv-show-all').click();
+	
+	same( $( '.fv-selected-row' ).length, 3, 'selected rows' );
+	
+	$.each( ['call PowerShell', 'call PowerShell', 'Call Python'], function(i,v) { 
+		same( $( '.fv-selected-row td').eq(i).text(), v, 'selected function' );
+	});	
+	
+});
+
+
+test ( 'show all on scenarios', function () {
+
+	$( '#fv-view-funcs' ).click();
+	
+	$( '#fv-view-used' ).click();
+	$( '#fv-view-funcs .fv-show-all').click();
+	
+	same( $( '.fv-selected-row' ).length, 12, 'selected rows' );
+	same( $( '.fv-selected-table' ).length, 11, 'selected scenarios' );
+	
+	$( '#fv-view-unused' ).click();
+	$( '#fv-view-funcs .fv-show-all').click();
+	
+	same( $( '.fv-selected-row' ).length, 0, 'selected rows' );
+	same( $( '.fv-selected-table' ).length, 3, 'selected scenarios' );
+	
+	$( '#fv-view-all' ).click();
+	$( '#fv-view-funcs .fv-show-all').click();
+	
+	same( $( '.fv-selected-table' ).length, 14, 'selected scenarios' );
+	
+});
+
+
 
 
 
