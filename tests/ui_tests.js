@@ -1,6 +1,8 @@
 module( 'ui', {
 
 	setup: function () {	
+	
+		$.fx.off = true;
 
 		$( '#fv-scenarios' ).remove();
 		$( '#tests' ).remove();
@@ -45,7 +47,7 @@ module( 'ui', {
         
         toggle_scenarios();	
 	
-	} 
+	}	
 
 });
 
@@ -168,22 +170,19 @@ test ( 'show all on scenarios', function () {
 
 	$( '#fv-view-funcs' ).click();
 	
-	$( '#fv-view-used' ).click();
-	$( '#fv-view-funcs .fv-show-all').click();
+	function check( id, rows, tables ) {
 	
-	same( $( '.fv-selected-row' ).length, 12, 'selected rows' );
-	same( $( '.fv-selected-table' ).length, 11, 'selected scenarios' );
+		$( id ).click();
+		$( '.fv-show-all').click();
 	
-	$( '#fv-view-unused' ).click();
-	$( '#fv-view-funcs .fv-show-all').click();
+		same( $( '.fv-selected-row' ).length, rows, 'selected rows for ' + id  );
+		same( $( '.fv-selected-table' ).length, tables, 'selected scenarios for ' + id );
 	
-	same( $( '.fv-selected-row' ).length, 0, 'selected rows' );
-	same( $( '.fv-selected-table' ).length, 3, 'selected scenarios' );
+	}
 	
-	$( '#fv-view-all' ).click();
-	$( '#fv-view-funcs .fv-show-all').click();
-	
-	same( $( '.fv-selected-table' ).length, 14, 'selected scenarios' );
+	check( '#fv-view-used' , 12, 11 );	
+	check( '#fv-view-unused', 0, 3 );	
+	check( '#fv-view-all', 12, 14);
 	
 });
 
