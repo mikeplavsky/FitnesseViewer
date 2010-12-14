@@ -49,7 +49,7 @@ var show_list = function ( res, list, id ) {
 	$( '.fv-show-all' ).hide();
 	$( '#' + id ).find( '.fv-show-all' ).show();
 	
-	$( '.fv-show-all' ).click( function(e) { show_all( list ); e.stopPropagation(); } );
+	$( '.fv-show-all' ).click( function(e) { show_all( list ); return false; } );
     
 };
 
