@@ -12,7 +12,7 @@ core.variables = function () {
 		var vars = $(this).text().match( /^undefined variable: (\w*)/ );		
 		vars && ( res[vars[1]] = vars[1] + ': Undefined' );
 		
-		vars = $(this).text().match( /^variable defined: (\w*)=(\w*)/ );
+		vars = $(this).text().match( /^variable defined: (\w*)=(.*)$/ );
 		vars && ( res[vars[1]] = vars[1] + ': ' + vars[2] );				
 		
 	});  

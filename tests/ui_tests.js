@@ -41,6 +41,10 @@ module( 'ui', {
 			)
 		
 		);
+		
+		$( '#tests' )
+		.append( '<span class="meta">undefined variable: Server' )
+		.append( '<span class="meta">variable defined: Password=12345' );	
         
         delete fitnesse.viewer.core.all_scenarios.res;
         delete core.parse_calls.res;
@@ -71,6 +75,8 @@ test( 'switching between views', function () {
 	check_view( '#fv-view-all', "14", 'number of discovered scenarios' );
     check_view( '#fv-view-used', "11", 'number of used scenarios' );
     check_view( '#fv-view-unused', "3", 'number of unused scenarios' );
+	check_view( '#fv-view-funcs', "2", 'number of unused functions' );
+	check_view( '#fv-view-variables', "2", 'number of variables' );
     
     var click_view = function (id, num,msg) {
     
@@ -100,6 +106,9 @@ test( 'switching between views', function () {
 	
 	click_view( '#fv-view-funcs', 2, 'used functions' );
     check_scenario( ['Call Python', 'call PowerShell' ] );
+	
+	click_view( '#fv-view-variables', 2, 'variables on the page' );
+    check_scenario( ['Password: 12345', 'Server: Undefined' ] );
 	
 });
 
@@ -185,19 +194,6 @@ test ( 'show all on scenarios', function () {
 	check( '#fv-view-all', 12, 14);
 	
 });
-
-
-test ( 'show all variables', function () {
-
-	$( '#tests' )
-	.append( '<span class="meta">undefined variable: Server' )
-	.append( '<span class="meta">variable defined: Password=12345' );
-	
-	
-	$( '#fv-view-variables' ).click();
-	
-});
-
 
 
 
