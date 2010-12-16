@@ -5,6 +5,7 @@
 * @param unused_scenarios
 * @param all_scenarios
 * @param functions
+* @param variables
 * @param list
 */
 {template .scenarios}
@@ -28,6 +29,10 @@
 	   
        <div class="fv-view" id="fv-view-unused">
          <span>Unused Scenarios: {$unused_scenarios}</span> <span class="fv-show-all">show all</span>		 
+       </div>
+	   
+	   <div class="fv-view" id="fv-view-variables">
+         <span>Variables: {$variables}</span> <span class="fv-show-all">show all</span>		 
        </div>
          
     </div>

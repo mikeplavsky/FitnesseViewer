@@ -54,7 +54,7 @@ module( 'ui', {
 test( 'when clicking adress bar icon scenarios ui is either shown or hidden', function () {
 	
 	equals( $( '#fv-header' ).length, 1, 'header of Scenario Panel');
-	equals( $( '#fv-header' ).find( '.fv-view' ).length, 4, 'views of Scenario Panel' );
+	equals( $( '#fv-header' ).find( '.fv-view' ).length, 5, 'views of Scenario Panel' );
 	
 	toggle_scenarios();	
 	
@@ -187,7 +187,16 @@ test ( 'show all on scenarios', function () {
 });
 
 
+test ( 'show all variables', function () {
 
+	$( '#tests' )
+	.append( '<span class="meta">undefined variable: Server' )
+	.append( '<span class="meta">variable defined: Password=12345' );
+	
+	
+	$( '#fv-view-variables' ).click();
+	
+});
 
 
 

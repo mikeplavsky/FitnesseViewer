@@ -2,6 +2,25 @@ goog.provide( 'fitnesse.viewer.core' );
 
 var core = fitnesse.viewer.core;
 
+
+core.variables = function () {
+
+	var res = {};
+
+	$( 'span.meta' ).each( function () {	
+		
+		var vars = $(this).text().match( /^undefined variable: (\w*)/ );		
+		vars && ( res[vars[1]] = vars[1] + ': Undefined' );
+		
+		vars = $(this).text().match( /^variable defined: (\w*)=(\w*)/ );
+		vars && ( res[vars[1]] = vars[1] + ': ' + vars[2] );				
+		
+	});  
+	
+	return create_array(res);
+
+}
+
 core.scenarios = function () {    
     return $( 'table' ).find( 'td:eq(0)' ).filter( function () { return $(this).text().match( /^scenario$/i ); }  );    
 };
@@ -137,6 +156,11 @@ core.script_scenarios = function (scr) {
     
 };
 
+function add_link(obj,link) {
+			obj.back_links || (obj.back_links = []);            
+            obj.back_links.push(link);
+}
+
 core.parse_calls = function () {
 
     if ( core.parse_calls.res ) {
@@ -152,11 +176,6 @@ core.parse_calls = function () {
     
     var parser = function() {
 	
-		function add_link(obj,link) {
-			obj.back_links || (obj.back_links = []);            
-            obj.back_links.push(link);
-		}
-    
         var scenario = all[this.name];
 	
 		if ( scenario ) {

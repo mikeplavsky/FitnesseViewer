@@ -31,7 +31,8 @@ var toggle_scenarios = function () {
 							  all_scenarios : all,   
 							  scenarios : used,
 							  unused_scenarios : all - used, 
-							  functions: res.func_calls.length,                          
+							  functions: res.func_calls.length,
+							  variables: core.variables().length,	
 							  list:  list 
 							
 							})));    
@@ -191,6 +192,11 @@ var toggle_scenarios = function () {
 			case 'fv-view-funcs':
 			
 				show_list(res, res.func_calls, id ); 
+				break;
+				
+			case 'fv-view-variables':
+			
+				show_list(res, core.variables(), id ); 
 				break;
 		
 		};
