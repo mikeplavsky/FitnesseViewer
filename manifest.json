@@ -1,9 +1,11 @@
 {
   "name": "Fitnesse Viewer",
-  "version": "0.2.6",
+  "version": "0.2.7",
   
   "description": "Show all scenarios on the page",
   
+  "content_security_policy": "default-src 'self'", 
+
   "background_page": "background.html",
   
    "permissions": [
@@ -20,7 +22,12 @@
   {
       "matches": ["http://*/*"],
       "css": ["styles/base.css"],
-      "js": [ "lib/jquery-1.4.4.js", "templates/scenarios.js", "templates/soyutils.js", "utils.js", "core.js", "ui.js", "inspector.js"]
+
+      "js": [ "lib/jquery-1.4.4.js","lib/base.js", 
+              "lib/deps.js" ,"templates/scenarios.js", 
+              "templates/soyutils.js",
+              "utils.js", "core.js", 
+              "ui.js", "inspector.js"]
   }
   ]
   
