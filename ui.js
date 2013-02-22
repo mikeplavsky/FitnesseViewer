@@ -93,6 +93,7 @@ var toggle_scenarios = function () {
 		);
 
 		$( '.hidden' ).removeClass( 'hidden' );
+		$( '.closed' ).removeClass( 'closed' );
 
 	}
 
