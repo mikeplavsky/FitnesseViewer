@@ -35,7 +35,7 @@ test( 'discovery of scenarios', function () {
     
     
     var len = core.scenarios().length;
-    equals( len, 2, 'found scenarios'	);
+    equal( len, 2, 'found scenarios'	);
     
 });
 
@@ -51,14 +51,14 @@ test( 'getting scenario names', function () {
     
     var all = core.scenarios();
 	
-	same( create_array( core.all_scenarios() ).length, 5, 'should not count scenario twice' );
+	deepEqual( create_array( core.all_scenarios() ).length, 5, 'should not count scenario twice' );
     
-    same( core.scenario_name( all.eq( 0 ) ), 'first', 'simple name: one cell' );    
-    same( core.scenario_name( all.eq( 1 ) ), 'create farm', 'scenario name scattered through several cells'	);		
-	same( core.scenario_name( all.eq( 2 ) ), 'create super site', 'scenario name can contain underscores with spaces'	);
-	same( core.scenario_name( all.eq( 3 ) ), 'create site', 'scenario name can contain underscores at the end'	);
-	same( core.scenario_name( all.eq( 4 ) ), 'create site', 'scenario name can contain underscores at the end and several spaces'	);
-	same( core.scenario_name( all.eq( 5 ) ), 'setup ad', 'scenario name can contain underscores'	);
+    deepEqual( core.scenario_name( all.eq( 0 ) ), 'first', 'simple name: one cell' );    
+    deepEqual( core.scenario_name( all.eq( 1 ) ), 'create farm', 'scenario name scattered through several cells'	);		
+	deepEqual( core.scenario_name( all.eq( 2 ) ), 'create super site', 'scenario name can contain underscores with spaces'	);
+	deepEqual( core.scenario_name( all.eq( 3 ) ), 'create site', 'scenario name can contain underscores at the end'	);
+	deepEqual( core.scenario_name( all.eq( 4 ) ), 'create site', 'scenario name can contain underscores at the end and several spaces'	);
+	deepEqual( core.scenario_name( all.eq( 5 ) ), 'setup ad', 'scenario name can contain underscores'	);
 	
 	
 });
@@ -73,7 +73,7 @@ test( 'getting all script tables', function() {
     .append( table( '<td>script' ) );
 
     var len = core.scripts().length;
-    equals( len, 3, 'found scripts' ); 
+    equal( len, 3, 'found scripts' ); 
 });
 
 
@@ -113,19 +113,19 @@ test( 'getting all scenario calls from script tables', function () {
 
     var scenarios = core.page_calls();
     
-    equals( 9, scenarios.length, 'number of calls'	);    
+    equal( 9, scenarios.length, 'number of calls'	);    
     
-    equals( scenarios[ 0 ].name, 'create farm', 'reject should be skipped' );
-    equals( scenarios[ 1 ].name, 'super farm', 'check should be skipped' );
-    equals( scenarios[ 2 ].name, 'delete farm', 'ensure should be skipped' );
-    equals( scenarios[ 3 ].name, 'backup farm', 'show should be skipped' );
+    equal( scenarios[ 0 ].name, 'create farm', 'reject should be skipped' );
+    equal( scenarios[ 1 ].name, 'super farm', 'check should be skipped' );
+    equal( scenarios[ 2 ].name, 'delete farm', 'ensure should be skipped' );
+    equal( scenarios[ 3 ].name, 'backup farm', 'show should be skipped' );
     
-    equals( scenarios[ 4 ].name, 'restore results', 'two cells' );
-    equals( scenarios[ 5 ].name, 'restore', '; at the end' );     
-    equals( scenarios[ 6 ].name, 'get data', 'symbol should be skipped' );
+    equal( scenarios[ 4 ].name, 'restore results', 'two cells' );
+    equal( scenarios[ 5 ].name, 'restore', '; at the end' );     
+    equal( scenarios[ 6 ].name, 'get data', 'symbol should be skipped' );
     
-    equals( scenarios[ 7 ].name, 'restored farm', 'check not should be skipped' );
-    equals( scenarios[ 8 ].name, 'farm name', 'last cell in check is not a part of scenario name' );
+    equal( scenarios[ 7 ].name, 'restored farm', 'check not should be skipped' );
+    equal( scenarios[ 8 ].name, 'farm name', 'last cell in check is not a part of scenario name' );
     
 });
 
@@ -141,10 +141,10 @@ test( 'getting scenario name and definition', function () {
 
     var all = core.all_scenarios();
     
-    equals( all[ 'create one' ].name, 'create one', 'first scenario name' );    
-    equals( all[ 'create two' ].name, 'create two', 'second scenario name' );
+    equal( all[ 'create one' ].name, 'create one', 'first scenario name' );    
+    equal( all[ 'create two' ].name, 'create two', 'second scenario name' );
 
-    equals( all[ 'create one' ].definition, table1[0].innerHTML, 'first scenario definition' );   
+    equal( all[ 'create one' ].definition, table1[0].innerHTML, 'first scenario definition' );   
 });
 
 
@@ -163,8 +163,8 @@ test( 'getting if call is scenario or function call', function () {
 
     var res = core.parse_calls();
     
-    equals( res.scenario_calls.length, 1, 'scenario calls' );    
-    equals( res.func_calls.length, 4, 'function calls' );    
+    equal( res.scenario_calls.length, 1, 'scenario calls' );    
+    equal( res.func_calls.length, 4, 'function calls' );    
 
 });
 
@@ -184,10 +184,10 @@ test( 'parsing of query tables', function () {
     
     var all = core.query_tables_calls();
     
-    equals( all.length, 4, 'found query tables' ); 
+    equal( all.length, 4, 'found query tables' ); 
     
-    equals( all[0].name, 'Add Farm', 'first query table call' );     
-    equals( all[1].name, 'Create', 'second query table call' );     
+    equal( all[0].name, 'Add Farm', 'first query table call' );     
+    equal( all[1].name, 'Create', 'second query table call' );     
 });
 
 
@@ -212,10 +212,10 @@ test( 'parsing of decision tables', function () {
     
     var all = core.decision_tables_calls();
     
-    equals( all.length, 2, 'found decision tables' );
+    equal( all.length, 2, 'found decision tables' );
     
-    equals( all[0].name, 'Add Farm', 'simple name' );
-    equals( all[1].name, 'Add Farm To MMC', 'several cells name' );
+    equal( all[0].name, 'Add Farm', 'simple name' );
+    equal( all[1].name, 'Add Farm To MMC', 'several cells name' );
     
 });
 
@@ -225,10 +225,10 @@ test( 'sorting array of objects by given attribute', function () {
     var arr = [ { name: 'Boris', order: 0 }, {name : 'Adam', order: 2 }, {name: 'Lem', order: 1 } ];
     
 	sortBy( arr, 'name' );    
-    equals( arr[0].name, 'Adam', 'sorting by name' );    
+    equal( arr[0].name, 'Adam', 'sorting by name' );    
 	
 	sortBy( arr, 'order' );
-	equals( arr[0].name, 'Boris', 'sorting by order' );    
+	equal( arr[0].name, 'Boris', 'sorting by order' );    
 });
 
 
@@ -237,7 +237,7 @@ test( 'convert object into simple array, attributes are lost!', function () {
     var map = {a:10, b: 20, attr: 12 };
     var res = create_array( map );
     
-    same( [10,20,12], res, 'final array' );
+    deepEqual( [10,20,12], res, 'final array' );
     
 });
 

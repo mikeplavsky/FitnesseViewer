@@ -53,19 +53,19 @@ module( 'ui', {
 
 test( 'when clicking adress bar icon scenarios ui is either shown or hidden', function () {
 	
-	equals( $( '#fv-header' ).length, 1, 'header of Scenario Panel');
-	equals( $( '#fv-header' ).find( '.fv-view' ).length, 4, 'views of Scenario Panel' );
+	equal( $( '#fv-header' ).length, 1, 'header of Scenario Panel');
+	equal( $( '#fv-header' ).find( '.fv-view' ).length, 4, 'views of Scenario Panel' );
 	
 	toggle_scenarios();	
 	
-	equals( $( '#fv-header' ).length, 0,  'Scenario Panel should be hidden' );
+	equal( $( '#fv-header' ).length, 0,  'Scenario Panel should be hidden' );
 	
 });
 
 test( 'switching between views', function () {
 
     var check_view = function (id,num,msg) {
-        same( $( id ).find('span:eq(0)').text().match( /\d*$/ )[0], num, msg );
+        deepEqual( $( id ).find('span:eq(0)').text().match( /\d*$/ )[0], num, msg );
     };
 	
 	check_view( '#fv-view-all', "14", 'number of discovered scenarios' );
@@ -75,16 +75,16 @@ test( 'switching between views', function () {
     var click_view = function (id, num,msg) {
     
         $( id ).click();	
-        equals( $( '.fv-scenario' ).length, num, msg );   
+        equal( $( '.fv-scenario' ).length, num, msg );   
         ok( $( id ).hasClass( 'fv-selected-view' ), 'appropriate view must be selected'  );
-        equals( $( '.fv-selected-view' ).length, 1, 'just one view is selected' ) 
+        equal( $( '.fv-selected-view' ).length, 1, 'just one view is selected' ) 
         
     };
     
     var check_scenario = function (arr) {
         
         $('.fv-scenario' ).each( function (i) {
-            i < arr.length && same( $(this).text(), arr[i], "right scenario name" );
+            i < arr.length && deepEqual( $(this).text(), arr[i], "right scenario name" );
         });
     
     };
@@ -111,7 +111,7 @@ test( 'scenario selection', function () {
 	$( '.fv-scenario:eq(0)' ).click();
 	
 	ok( $( '.fv-scenario:eq(0)' ).hasClass( 'fv-selected-scenario' ), 'sceanario is selected on click'  );	
-	same( $( '.fv-selected-scenario' ).length, 1, 'selected just one scenario'  );
+	deepEqual( $( '.fv-selected-scenario' ).length, 1, 'selected just one scenario'  );
 	
 });
 
@@ -123,8 +123,8 @@ test ( 'showing scenario', function () {
 	
     $( '.fv-scenario:eq(1)' ).click();
     
-    same( $( '.fv-selected-table' ).length, 1, 'just one scenario selected' );
-    same( $( '.fv-selected-row' ).length, 2, 'selected rows' );
+    deepEqual( $( '.fv-selected-table' ).length, 1, 'just one scenario selected' );
+    deepEqual( $( '.fv-selected-row' ).length, 2, 'selected rows' );
     
     ok( $( 'td:contains(Add File)' ).closest( 'table' ).hasClass( 'fv-selected-table' ), 'selected scenario'  );
     ok( $( 'td:contains(Add File)' ).closest( 'tr' ).hasClass( 'fv-selected-row' ), 'selected row'  );    
@@ -138,11 +138,11 @@ test ( 'showing function', function () {
 	
     $( '.fv-scenario:eq(1)' ).click();
     
-    same( $( '.fv-selected-table' ).length, 0, 'no scenario tables selected' );
-    same( $( '.fv-selected-row' ).length, 2, 'selected rows with function' );    
+    deepEqual( $( '.fv-selected-table' ).length, 0, 'no scenario tables selected' );
+    deepEqual( $( '.fv-selected-row' ).length, 2, 'selected rows with function' );    
 	
-	same( $($( '.fv-selected-row' )[0]).closest( 'table' ).find( 'tr:eq(0)' ).find( 'td:eq(1)' ).text(), "Restore Farm", "function shown in scenario" );
-	same( $($( '.fv-selected-row' )[1]).closest( 'table' ).find( 'tr:eq(0)' ).find( 'td:eq(0)' ).text(), "Script", "function shown in script" );
+	deepEqual( $($( '.fv-selected-row' )[0]).closest( 'table' ).find( 'tr:eq(0)' ).find( 'td:eq(1)' ).text(), "Restore Farm", "function shown in scenario" );
+	deepEqual( $($( '.fv-selected-row' )[1]).closest( 'table' ).find( 'tr:eq(0)' ).find( 'td:eq(0)' ).text(), "Script", "function shown in script" );
     
 });
 
@@ -152,15 +152,15 @@ test ( 'show all used functions', function () {
 	$( '#fv-view-unused' ).click();
     $( '#fv-view-funcs' ).click();
 
-	same( $( '#fv-view-funcs .fv-show-all' ).css( 'display' ), 'inline', 'should be visible' );		
-	same( $( '#fv-view-unused .fv-show-all' ).css( 'display' ), 'none', 'should be hidden' );		
+	deepEqual( $( '#fv-view-funcs .fv-show-all' ).css( 'display' ), 'inline', 'should be visible' );		
+	deepEqual( $( '#fv-view-unused .fv-show-all' ).css( 'display' ), 'none', 'should be hidden' );		
 	
 	$( '#fv-view-funcs .fv-show-all').click();
 	
-	same( $( '.fv-selected-row' ).length, 3, 'selected rows' );
+	deepEqual( $( '.fv-selected-row' ).length, 3, 'selected rows' );
 	
 	$.each( ['call PowerShell', 'call PowerShell', 'Call Python'], function(i,v) { 
-		same( $( '.fv-selected-row td').eq(i).text(), v, 'selected function' );
+		deepEqual( $( '.fv-selected-row td').eq(i).text(), v, 'selected function' );
 	});	
 	
 });
@@ -175,8 +175,8 @@ test ( 'show all on scenarios', function () {
 		$( id ).click();
 		$( '.fv-show-all').click();
 	
-		same( $( '.fv-selected-row' ).length, rows, 'selected rows for ' + id  );
-		same( $( '.fv-selected-table' ).length, tables, 'selected scenarios for ' + id );
+		deepEqual( $( '.fv-selected-row' ).length, rows, 'selected rows for ' + id  );
+		deepEqual( $( '.fv-selected-table' ).length, tables, 'selected scenarios for ' + id );
 	
 	}
 	
