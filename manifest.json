@@ -1,14 +1,21 @@
 {
+  "manifest_version": 2,
+
   "name": "Fitnesse Viewer",
-  "version": "0.2.7",
+  "version": "0.2.8",
   
   "description": "Show all scenarios on the page",
   
   "content_security_policy": "default-src 'self'", 
 
-  "background_page": "background.html",
+  "background": {
+    
+    "scripts": ["background.js"], 
+    "persistant": false
+
+  }, 
   
-   "permissions": [
+  "permissions": [
     "http://*/*"
   ],
   
