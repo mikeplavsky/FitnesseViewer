@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Fitnesse Viewer",
-  "version": "0.2.8",
+  "version": "0.2.9",
   
   "description": "Show all scenarios on the page",
   
@@ -16,7 +16,7 @@
   }, 
   
   "permissions": [
-    "http://*/*"
+    "http://*/*","https://*/*"
   ],
   
   "page_action": {
@@ -27,7 +27,7 @@
   
   "content_scripts": [
   {
-      "matches": ["http://*/*"],
+      "matches": ["http://*/*", "https://*/*"],
       "css": ["styles/base.css"],
 
       "js": [ "lib/jquery-1.4.4.js","lib/base.js", 
